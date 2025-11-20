@@ -9,13 +9,13 @@ lebih terstruktur serta efisien.
 
 ## 👥 Anggota Kelompok
   -----------------------------------------------------------------------
-  1    Mutia Pegi Intanswari          Backend Developer / Repo Owner
+  1    Mutia Pegi Intanswari         
 
-  2    Fransiskus Farel Saputra       Developer
+  2    Fransiskus Farel Saputra       
 
-  3    Fadhil Bintang Pratama         Developer
+  3    Fadhil Bintang Pratama         
 
-  4    Khansa Bintari                 Developer
+  4    Khansa Bintari                
 
 ------------------------------------------------------------------------
 
