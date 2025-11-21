@@ -9,17 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up(): void
+    public function up(): void
 {
-    Schema::create('clients', function (Blueprint $table) {
+    Schema::create('products', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-        $table->string('nama_usaha');
-        $table->string('nomor_hp')->nullable();
-        $table->text('alamat')->nullable();
+        $table->string('nama_produk');
+        $table->text('deskripsi')->nullable();
+        $table->decimal('harga_default', 15, 2)->nullable();
         $table->timestamps();
     });
 }
+
 
     /**
      * Reverse the migrations.
