@@ -85,7 +85,7 @@
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: var(--bs-font-sans-serif);
   --bs-body-font-size: 0.9375rem;
-  --bs-body-font-weight: 400;
+  --bs-body-font-weight: 800;
   --bs-body-line-height: 1.5;
   --bs-body-color: #67757c;
   --bs-body-color-rgb: 103, 117, 124;
@@ -226,7 +226,7 @@ hr {
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 900;
   line-height: 1.2;
   color: var(--bs-heading-color);
 }
