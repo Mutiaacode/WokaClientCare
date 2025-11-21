@@ -1,10 +1,13 @@
 <aside class="left-sidebar" data-sidebarbg="skin6">
     <div class="scroll-sidebar" data-simplebar>
 
-        <!-- Brand/logo -->
+        <!-- LOGO / TITLE -->
+        <div class=" py-4 mt-3">
+            <img src="{{ asset('assets/images/woka1.png') }}" alt="Woka Care Logo" style="width: 140px; height:auto;">
+        </div>
 
 
-        <!-- Sidebar navigation-->
+        <!-- Sidebar navigation -->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
 
