@@ -32,7 +32,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('admin.product.index') }}">
                             <i class="ti ti-package"></i>
                             <span class="hide-menu">Products</span>
                         </a>
