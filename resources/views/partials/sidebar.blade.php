@@ -11,7 +11,7 @@
                 {{-- ========== ADMIN ========== --}}
                 @if (auth()->user()->role === 'admin')
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
                             <i class="ti ti-layout-dashboard"></i>
                             <span class="hide-menu">Dashboard</span>
                         </a>
@@ -25,7 +25,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('admin.clients.index') }}">
                             <i class="ti ti-user"></i>
                             <span class="hide-menu">Clients</span>
                         </a>
