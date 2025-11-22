@@ -9,7 +9,7 @@
 
         <div class="table-responsive px-3 pb-3">
             <table class="table table-striped table-bordered">
-                <thead class="">
+                <thead class="table">
                     <tr>
                         <th>Nama</th>
                         <th>Nama Usaha</th>
