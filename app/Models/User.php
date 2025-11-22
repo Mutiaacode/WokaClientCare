@@ -15,6 +15,16 @@ class User extends Authenticatable
 
     public function client()
     {
-        return $this->hasOne(Client::class);
+        return $this->hasOne(Client::class , 'user_id');
+    }
+
+    public function ticketS()
+    {
+        return $this->hasMany(Ticket::class , 'staff_id');
+    }
+
+    public function ticketT()
+    {
+        return $this->hasMany(Ticket::class , 'teknisi_id');
     }
 }

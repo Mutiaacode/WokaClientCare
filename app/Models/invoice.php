@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class invoice extends Model
+class Invoice extends Model
 {
     protected $fillable = [
         'client_id',
@@ -20,4 +20,19 @@ class invoice extends Model
         'status',
         'catatan',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class , 'client_id');
+    }
+
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class , 'contract_id');
+    }
+
+     public function payment()
+    {
+        return $this->hasMany(Payment::class, 'invoice_id');
+    }
 }

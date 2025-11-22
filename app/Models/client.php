@@ -15,7 +15,22 @@ class Client extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class , 'user_id');
+    }
+
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class , 'client_id');
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class , 'client_id');
+    }
+
+    public function ticket()
+    {
+        return $this->hasMany( Ticket::class , 'client_id');
     }
   
 }
