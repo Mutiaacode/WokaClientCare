@@ -16,9 +16,9 @@ class Ticket extends Model
         'teknisi_id',
         'judul', 
         'deskripsi',
-         'prioritas', 
-         'status', 
-         'lampiran'
+        'prioritas', 
+        'status', 
+        'lampiran'
     ];
 
     public function client()
