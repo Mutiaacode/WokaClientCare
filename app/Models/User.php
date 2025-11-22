@@ -10,21 +10,35 @@ class User extends Authenticatable
     use HasFactory;
 
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'phone'
+        'name', 
+        'email',
+        'password', 
+        'role', 
+        'phone'
     ];
 
     public function client()
     {
-        return $this->hasOne(Client::class , 'user_id');
+        return $this->hasOne(Client::class);
     }
 
-    public function ticketS()
+    public function ticketsReviewed()
     {
-        return $this->hasMany(Ticket::class , 'staff_id');
+        return $this->hasMany(Ticket::class, 'staff_id');
     }
 
-    public function ticketT()
+    public function ticketsAssigned()
     {
-        return $this->hasMany(Ticket::class , 'teknisi_id');
+        return $this->hasMany(Ticket::class, 'teknisi_id');
+    }
+
+    public function ticketLogs()
+    {
+        return $this->hasMany(TicketLog::class);
+    }
+
+    public function paymentsVerified()
+    {
+        return $this->hasMany(Payment::class, 'diverifikasi_oleh');
     }
 }

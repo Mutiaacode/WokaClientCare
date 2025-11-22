@@ -3,18 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    protected $fillable = [
-        'nama_product',
-        'deskripsi',
-        'harga_default',
+    use HasFactory;
 
+    protected $fillable = [
+        'nama_produk', 
+        'deskripsi', 
+        'harga_default'
     ];
 
     public function contracts()
     {
-        return $this->hasMany(Contract::class , 'product_id');
+        return $this->hasMany(Contract::class, 'produk_id');
     }
 }

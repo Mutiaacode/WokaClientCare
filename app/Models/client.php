@@ -10,27 +10,29 @@ class Client extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'nama_usaha', 'nomor_hp', 'alamat'
+        'user_id', 
+        'nama_usaha', 
+        'nomor_hp', 
+        'alamat'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public function contracts()
     {
-        return $this->hasMany(Contract::class , 'client_id');
+        return $this->hasMany(Contract::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
     }
 
     public function invoices()
     {
-        return $this->hasMany(Invoice::class , 'client_id');
+        return $this->hasMany(Invoice::class);
     }
-
-    public function ticket()
-    {
-        return $this->hasMany( Ticket::class , 'client_id');
-    }
-  
 }

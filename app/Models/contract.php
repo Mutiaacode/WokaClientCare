@@ -3,42 +3,49 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Contract extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'client_id',
-        'product_id',
-        'nomor_kontrak',
+        'client_id', 
+        'produk_id', 
+        'nomor_kontrak', 
         'tipe_kontrak',
-        'periode_tagihan',
-        'nama_layanan',
+        'periode_tagihan', 
+        'nama_layanan', 
         'tanggal_mulai',
-        'tanggal_berakhir',
-        'harga_layanan',
+        'tanggal_berakhir', 
+        'harga_layanan', 
         'status',
+        'file_kontrak', 
+        'catatan'
     ];
 
     public function client()
     {
-        return $this->belongsTo(Client::class , 'client_id');
+        return $this->belongsTo(Client::class);
     }
 
     public function product()
     {
-        return $this->belongsTo(Product::class , 'product_id');
+        return $this->belongsTo(Product::class, 'produk_id');
     }
 
-    public function invoic()
+    public function tickets()
     {
-        return $this->hasMany(Invoice::class, 'contract_id');
+        return $this->hasMany(Ticket::class);
     }
-    public function MaintenanceSchedule()
+
+    public function invoices()
     {
-        return $this->hasMany(Maintenance_schedule::class, 'contract_id');
+        return $this->hasMany(Invoice::class);
     }
-    public function ticket()
+
+    public function maintenanceSchedules()
     {
-        return $this->hasMany(Ticket::class, 'contract_id');
+        return $this->hasMany(MaintenanceSchedule::class);
     }
 }

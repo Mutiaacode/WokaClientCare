@@ -3,39 +3,46 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ticket extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'client_id',
-        'contract_id',
-        'staff_id',
+        'client_id', 
+        'contract_id', 
+        'staff_id', 
         'teknisi_id',
-        'judul',
+        'judul', 
         'deskripsi',
-        'prioritas',
-        'status',
-        'lampiran',
+         'prioritas', 
+         'status', 
+         'lampiran'
     ];
 
-    public function ticket()
+    public function client()
     {
-        return $this->belongsTo(Ticket::class, 'client_id');
+        return $this->belongsTo(Client::class);
     }
-    public function contact()
+
+    public function contract()
     {
-        return $this->belongsTo(Contract::class, 'contract_id');
+        return $this->belongsTo(Contract::class);
     }
-    public function userS()
+
+    public function staff()
     {
-        return $this->belongsTo(User::class, 'straff_id');
+        return $this->belongsTo(User::class, 'staff_id');
     }
-    public function userT()
+
+    public function teknisi()
     {
         return $this->belongsTo(User::class, 'teknisi_id');
     }
-    public function ticketLog()
+
+    public function logs()
     {
-        return $this->hasMany(Ticket_log::class, 'ticket_id');
+        return $this->hasMany(TicketLog::class);
     }
 }
