@@ -25,5 +25,5 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     })->name('dashboard');
 
     Route::resource('clients', ClientController::class);
-    Route::resource('products', ProductController::class);
+    Route::resource('product', ProductController::class);
 });
