@@ -1,7 +1,7 @@
 <aside class="left-sidebar" data-sidebarbg="skin6">
     <div class="scroll-sidebar" data-simplebar>
 
-        <div class="py-4 mt-3 text-center">
+        <div class="py-4 mt-3 ">
             <img src="{{ asset('assets/images/woka1.png') }}" alt="Woka Care Logo" style="width: 140px;">
         </div>
 
