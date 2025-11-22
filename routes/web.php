@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -24,4 +25,5 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     })->name('dashboard');
 
     Route::resource('clients', ClientController::class);
+    Route::resource('products', ProductController::class);
 });
