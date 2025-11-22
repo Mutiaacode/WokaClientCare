@@ -93,16 +93,7 @@
     </div>
 
     {{-- Chart placeholder --}}
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Revenue Chart</h5>
-                    <div id="revenue-chart" style="height: 350px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 @endsection
 
 @push('scripts')
