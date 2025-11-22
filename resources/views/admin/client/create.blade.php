@@ -32,11 +32,7 @@
                     <input type="password" name="password" class="form-control form-control-lg rounded-3">
                 </div>
             </div>
-
             <hr class="my-4">
-
-
-
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
                     <label class="form-label fw-medium">Nama Usaha</label>
