@@ -12,12 +12,12 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::with('user')->get();
-        return view('admin.client.index', compact('clients'));
+        return view('admin.clients.index', compact('clients'));
     }
 
     public function create()
     {
-        return view('admin.client.create');
+        return view('admin.clients.create');
     }
 
     public function store(Request $request)
@@ -54,7 +54,7 @@ class ClientController extends Controller
     public function edit($id)
     {
         $client = Client::with('user')->findOrFail($id);
-        return view('admin.client.edit', compact('client'));
+        return view('admin.clients.edit', compact('client'));
     }
 
     public function update(Request $request, $id)
@@ -66,7 +66,6 @@ class ClientController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $client->user->id,
             'password' => 'nullable|min:6',
-
 
             'nama_usaha' => 'required|max:255',
             'nomor_hp' => 'nullable|max:20',
@@ -80,7 +79,6 @@ class ClientController extends Controller
                 ? Hash::make($validated['password'])
                 : $client->user->password,
         ]);
-
 
         $client->update([
             'nama_usaha' => $validated['nama_usaha'],
