@@ -37,7 +37,7 @@ class UserController extends Controller
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role'     => $validated['role'],
-            'phone'    => $request->phone ?? null,
+            
         ]);
 
         return redirect()->route('admin.users.index')->with('sukses', 'User berhasil ditambahkan!');
@@ -68,7 +68,7 @@ class UserController extends Controller
                 ? Hash::make($validated['password'])
                 : $user->password,
             'role'  => $validated['role'],
-            'phone' => $request->phone ?? $user->phone,
+           
         ]);
 
         return redirect()->route('admin.users.index')->with('sukses', 'User berhasil diperbarui!');
