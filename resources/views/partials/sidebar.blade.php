@@ -87,9 +87,9 @@
                 <li class="sidebar-item mt-auto">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" 
-                                class="sidebar-link btn w-100 text-start d-flex align-items-center px-3 border-0 bg-transparent"
-                                style="padding-left: 14px;">
+                        <button type="submit"
+                            class="sidebar-link btn w-100 text-start d-flex align-items-center px-3 border-0 bg-transparent"
+                            style="padding-left: 14px;">
                             <i class="ti ti-logout me-2"></i>
                             <span class="hide-menu">Logout</span>
                         </button>
