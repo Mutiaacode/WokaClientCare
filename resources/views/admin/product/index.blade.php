@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card shadow-sm border-0 rounded-3">
+    <div class="card shadow border-0 rounded-3">
         <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-3 rounded-top">
             <h4 class="mb-0 text-white">Daftar Produk</h4>
             <a href="{{ route('admin.product.create') }}" class="btn btn-light fw-bold">+ Tambah Produk</a>

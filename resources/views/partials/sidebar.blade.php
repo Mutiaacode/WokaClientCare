@@ -38,7 +38,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('admin.contract.index') }}">
                             <i class="ti ti-file-text"></i>
                             <span class="hide-menu">Contracts</span>
                         </a>
