@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContractController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -27,5 +28,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::resource('clients', ClientController::class);
     Route::resource('product', ProductController::class);
-     Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('contract', ContractController::class);
 });
