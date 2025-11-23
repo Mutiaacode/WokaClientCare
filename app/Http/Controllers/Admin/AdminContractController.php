@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contract;
 use App\Models\Client;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 
-class ContractController extends Controller
+class AdminContractController extends Controller
 {
     private function generateNomorKontrak()
     {

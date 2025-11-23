@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Client;
 use Illuminate\Support\Facades\Hash;
 
-class ClientController extends Controller
+class AdminClientController extends Controller
 {
     public function index()
     {

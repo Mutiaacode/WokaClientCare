@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ContractController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminClientController;
+use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminContractController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -19,15 +20,19 @@ Route::post('/login', [AuthController::class, 'login'])
     ->middleware('redirect.auth')
     ->name('login.process');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('logout');
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+Route::middleware(['auth', 'role:admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-    Route::resource('clients', ClientController::class);
-    Route::resource('product', ProductController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('contract', ContractController::class);
-});
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+            ->name('dashboard');
+
+        Route::resource('clients', AdminClientController::class);
+        Route::resource('product', AdminProductController::class);
+        Route::resource('users', AdminUserController::class);
+        Route::resource('contract', AdminContractController::class);
+    });
