@@ -9,7 +9,7 @@ use App\Models\Client;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 
-class ContractController extends Controller
+class AdminContractController extends Controller
 {
     private function generateNomorKontrak()
     {

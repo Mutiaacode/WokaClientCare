@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Client;
 use Illuminate\Support\Facades\Hash;
 
-class ClientController extends Controller
+class AdminClientController extends Controller
 {
     public function index()
     {
