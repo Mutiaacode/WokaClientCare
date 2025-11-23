@@ -38,7 +38,7 @@
   --bs-success: #39cb7f;
   --bs-info: #0bb2fb;
   --bs-warning: #fdc90f;
-  --bs-danger: #fc4b6c;
+  --bs-danger: #ff002f;
   --bs-light: #f6f8fb;
   --bs-dark: #11142d;
   --bs-muted: #777e89;
@@ -60,7 +60,7 @@
   --bs-success-text-emphasis: shade-color(#39cb7f, 60%);
   --bs-info-text-emphasis: shade-color(#0bb2fb, 60%);
   --bs-warning-text-emphasis: shade-color(#fdc90f, 60%);
-  --bs-danger-text-emphasis: shade-color(#fc4b6c, 60%);
+  --bs-danger-text-emphasis: shade-color(#ff002f, 60%);
   --bs-light-text-emphasis: #f6f8fb;
   --bs-dark-text-emphasis: #11142d;
   --bs-primary-bg-subtle: #ddebff;
@@ -10943,12 +10943,12 @@ fieldset:disabled .btn {
 
 .bg-warning {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-warning-rgb), var(--bs-bg-opacity)) !important;
+  background-color: var(--bs-yellow);
 }
 
 .bg-danger {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
+  background-color: red;
 }
 
 .bg-light {
