@@ -95,7 +95,7 @@
                         </a>
                     </li>   
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="">
+                        <a class="sidebar-link" href="{{ route('client.ticket.index') }}">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">Tickets</span>
                         </a>
