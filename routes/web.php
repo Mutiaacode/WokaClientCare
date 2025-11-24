@@ -63,11 +63,5 @@ Route::middleware(['auth', 'role:client'])
 
         Route::resource('ticket', ClientTicketController::class);    
     });
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
- 
->>>>>>> db9942b836f86d9e8d727e45858519c7d752216e
-=======
->>>>>>> 0fb13269be0176eac46e8944e8d6e764f0f1500f
+
