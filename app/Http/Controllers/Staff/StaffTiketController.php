@@ -15,12 +15,12 @@ class StaffTiketController extends Controller
     // ----------------------
     public function dashboard()
     {
-        $tickets = Ticket::where('staff_id', auth())->get();
+        $tickets = Ticket::where('staff_id', auth()->id())->get();
 
         $stats = [
             'open' => Ticket::where('staff_id', auth())->where('status', 'open')->count(),
-            'in_progress' => Ticket::where('staff_id', auth())->where('status', 'in_progress')->count(),
-            'waiting_tech' => Ticket::where('staff_id', auth())->where('status', 'waiting_tech')->count(),
+            'in_progress' => Ticket::where('staff_id', auth()->id())->where('status', 'in_progress')->count(),
+            'waiting_tech' => Ticket::where('staff_id', auth()->id())->where('status', 'waiting_tech')->count(),
         ];
 
         return view('staff.dashboard', compact('tickets', 'stats'));
@@ -31,7 +31,7 @@ class StaffTiketController extends Controller
     // ----------------------
     public function index()
     {
-        $tickets = Ticket::where('staff_id', auth())->paginate(10);
+        $tickets = Ticket::where('staff_id', auth()->id())->paginate(10);
         return view('staff.tickets.index', compact('tickets'));
     }
 
@@ -41,13 +41,14 @@ class StaffTiketController extends Controller
     public function show($id)
     {
         $ticket = Ticket::where('id', $id)
-                ->where('staff_id', auth())
-                ->firstOrFail();
+            ->where('staff_id', auth()->id())
+            ->firstOrFail();
 
         $technicians = User::where('role', 'technician')->get();
 
         return view('staff.tickets.show', compact('ticket', 'technicians'));
     }
+
 
     // ----------------------
     // 4. Start Ticket (open -> in_progress)
@@ -92,8 +93,8 @@ class StaffTiketController extends Controller
 
         TicketLog::create([
             'ticket_id' => $id,
-            'user_id' => auth(),
-            'action' => 'Assign technician: '.$request->technician_id,
+            'user_id' => auth()->id,
+            'action' => 'Assign technician: ' . $request->technician_id,
             'notes' => $request->log,
         ]);
 
