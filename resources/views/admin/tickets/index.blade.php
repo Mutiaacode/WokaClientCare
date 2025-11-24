@@ -7,9 +7,10 @@
 @endif
 
 <div class="card shadow border-0 rounded-3">
-    <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-3 rounded-top">
+    <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-4 rounded-top">
         <h4 class="mb-0 text-white">Data Tiket</h4>
     </div>
+    
 
     <div class="table-responsive p-3">
         <table class="table table-hover table-bordered align-middle mb-0">
