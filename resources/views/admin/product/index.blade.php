@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
+ @if (session('sukses'))
+            <div class="alert alert-success mt-3 px-4">{{ session('sukses') }}</div>
+        @endif
+
+
     <div class="card shadow border-0 rounded-3">
         <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-3 rounded-top">
             <h4 class="mb-0 text-white">Daftar Produk</h4>
