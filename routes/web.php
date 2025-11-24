@@ -45,7 +45,6 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('users', AdminUserController::class);
         Route::resource('contract', AdminContractController::class);
         Route::resource('tickets', AdminTicketController::class);
-
     });
 
 Route::middleware(['auth', 'role:client'])
@@ -63,7 +62,7 @@ Route::middleware(['auth', 'role:client'])
         Route::post('/contract/{id}/approve', [ClientContractController::class, 'approve'])
             ->name('contract.approve');
 
-        Route::resource('ticket', ClientTicketController::class);    
+        Route::resource('ticket', ClientTicketController::class);
     });
 
 Route::middleware(['auth', 'role:teknisi'])
