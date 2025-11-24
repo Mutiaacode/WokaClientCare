@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Teknisi\TeknisiDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
@@ -35,4 +36,13 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('product', AdminProductController::class);
         Route::resource('users', AdminUserController::class);
         Route::resource('contract', AdminContractController::class);
+    });
+
+Route::middleware(['auth', 'role:teknisi'])
+    ->prefix('teknisi')
+    ->name('teknisi.')
+    ->group(function () {
+
+        Route::get('/dashboard', [TeknisiDashboardController::class, 'index'])
+            ->name('dashboard');
     });
