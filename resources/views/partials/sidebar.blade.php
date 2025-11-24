@@ -1,13 +1,14 @@
 <aside class="left-sidebar" data-sidebarbg="skin6">
     <div class="scroll-sidebar" data-simplebar>
 
-        <div class="py-4 mt-3 ">
+        <div class="py-4 mt-3 text-center">
             <img src="{{ asset('assets/images/woka1.png') }}" alt="Woka Care Logo" style="width: 140px;">
         </div>
 
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
 
+                {{-- ================= ADMIN ================= --}}
                 @if (auth()->user()->role === 'admin')
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
@@ -23,7 +24,7 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ request()->routeIs('admin.clients.*') ? 'active' : '' }}">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('admin.clients.index') }}">
                             <i class="ti ti-user"></i>
                             <span class="hide-menu">Clients</span>
@@ -52,7 +53,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('admin.invoices.index') }}">
                             <i class="ti ti-receipt"></i>
                             <span class="hide-menu">Invoices</span>
                         </a>
@@ -73,6 +74,7 @@
                     </li>
                 @endif
 
+                {{-- ================= CLIENT ================= --}}
                 @if (auth()->user()->role === 'client')
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('client.dashboard') }}">
@@ -87,65 +89,71 @@
                             <span class="hide-menu">Contracts</span>
                         </a>
                     </li>
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('client.ticket.index') }}">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">Tickets</span>
                         </a>
                     </li>
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="#">
                             <i class="ti ti-receipt"></i>
-                            <span class="hide-menu">Invoice</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
-                            <i class="ti ti-tools"></i>
-                            <span class="hide-menu">Maintenance</span>
+                            <span class="hide-menu">Invoices</span>
                         </a>
                     </li>
                 @endif
 
-                   @if (auth()->user()->role === 'staff')
+                {{-- ================= STAFF ================= --}}
+                @if (auth()->user()->role === 'staff')
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('staff.dashboard') }}">
                             <i class="ti ti-layout-dashboard"></i>
                             <span class="hide-menu">Dashboard</span>
                         </a>
                     </li>
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('staff.tickets.index') }}">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">Tickets</span>
                         </a>
                     </li>
+                @endif
+
+                {{-- ================= TEKNISI ================= --}}
+                @if (auth()->user()->role === 'teknisi')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('teknisi.dashboard') }}">
+                            <i class="ti ti-layout-dashboard"></i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('teknisi.maintenance.index') }}">
                             <i class="ti ti-tools"></i>
                             <span class="hide-menu">Maintenance</span>
-                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
-                            <i class="ti ti-ticket"></i>
-                            <span class="hide-menu">Invoice</span>
                         </a>
                     </li>
                 @endif
 
-                {{-- Tambahkan di paling bawah --}}
+                {{-- ================= LOGOUT ================= --}}
                 <hr class="my-3">
+
                 <li class="sidebar-item mt-auto">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit"
-                            class="sidebar-link btn w-100 text-start d-flex align-items-center px-3 border-0 bg-transparent"
-                            style="padding-left: 14px;">
+                            class="sidebar-link btn w-100 text-start d-flex align-items-center px-3 border-0 bg-transparent">
                             <i class="ti ti-logout me-2"></i>
                             <span class="hide-menu">Logout</span>
                         </button>
                     </form>
                 </li>
 
+                {{-- ================= USER INFO ================= --}}
                 <hr class="my-3">
                 <li class="sidebar-item mt-auto px-3">
                     <div class="p-3" style="border-radius: 12px; background: #f7f7f7;">
@@ -155,8 +163,9 @@
                         </small>
                     </div>
                 </li>
+
             </ul>
         </nav>
-    </div>
 
+    </div>
 </aside>
