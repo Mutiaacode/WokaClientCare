@@ -3,7 +3,7 @@
 @section('content')
     {{-- HEADER --}}
     <div class="mb-4">
-        <p class="text-muted mb-0">Ringkasan data dalam sistem</p>
+        <p class="text-muted mb-0">Ringkasan data dalam sistem admin</p>
     </div>
 
     {{-- TOP CARDS --}}
