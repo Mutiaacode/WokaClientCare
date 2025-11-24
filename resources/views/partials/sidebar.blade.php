@@ -80,6 +80,40 @@
                     </li>
                 @endif
 
+                @if (auth()->user()->role === 'client')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('client.dashboard') }}">
+                            <i class="ti ti-layout-dashboard"></i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('client.contract.index')  }}">
+                            <i class="ti ti-file-text"></i>
+                            <span class="hide-menu">Contracts</span>
+                        </a>
+                    </li>   
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="ti ti-ticket"></i>
+                            <span class="hide-menu">Tickets</span>
+                        </a>
+                    </li>
+                     <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="ti ti-ticket"></i>
+                            <span class="hide-menu">Invoice</span>
+                        </a>
+                    </li>
+                     <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="ti ti-ticket"></i>
+                            <span class="hide-menu">Maintenan</span>
+                        </a>
+                    </li>
+                @endif
+
 
                 {{-- Tambahkan di paling bawah --}}
                 <hr class="my-3">
