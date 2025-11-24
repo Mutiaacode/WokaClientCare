@@ -114,6 +114,33 @@
                     </li>
                 @endif
 
+                @if (auth()->user()->role === 'teknisi')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('teknisi.dashboard') }}">
+                            <i class="ti ti-layout-dashboard"></i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('teknisi.ticket.index') }}">
+                            <i class="ti ti-ticket"></i>
+                            <span class="hide-menu">Tickets</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="ti ti-tools"></i>
+                            <span class="hide-menu">invoice</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="ti ti-tools"></i>
+                            <span class="hide-menu">Maintenance</span>
+                        </a>
+                    </li>
+                @endif
+
 
                 {{-- Tambahkan di paling bawah --}}
                 <hr class="my-3">
