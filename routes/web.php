@@ -75,7 +75,6 @@ Route::middleware(['auth', 'role:teknisi'])
     });
 
 
-
 Route::middleware(['auth', 'role:staff'])
     ->prefix('staff')
     ->name('staff.')
