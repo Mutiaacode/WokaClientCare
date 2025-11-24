@@ -46,7 +46,6 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('users', AdminUserController::class);
         Route::resource('contract', AdminContractController::class);
         Route::resource('tickets', AdminTicketController::class);
-       
     });
 
 Route::middleware(['auth', 'role:client'])
@@ -71,7 +70,7 @@ Route::middleware(['auth', 'role:teknisi'])
         Route::get('/dashboard', [TeknisiDashboardController::class, 'index'])
             ->name('dashboard');
         Route::resource('ticket', TeknisiTicketController::class);
-});
+    });
 
 
 
