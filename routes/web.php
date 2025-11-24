@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Teknisi\TeknisiDashboardController;
 use App\Http\Controllers\Teknisi\TeknisiTicketController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
@@ -45,6 +46,9 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('users', AdminUserController::class);
         Route::resource('contract', AdminContractController::class);
         Route::resource('tickets', AdminTicketController::class);
+
+
+       
     });
 
 Route::middleware(['auth', 'role:client'])

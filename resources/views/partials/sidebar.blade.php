@@ -53,13 +53,6 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="#">
-                            <i class="ti ti-history"></i>
-                            <span class="hide-menu">Ticket Logs</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
                             <i class="ti ti-receipt"></i>
                             <span class="hide-menu">Invoices</span>
                         </a>
