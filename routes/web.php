@@ -42,7 +42,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('product', AdminProductController::class);
         Route::resource('users', AdminUserController::class);
         Route::resource('contract', AdminContractController::class);
-        Route::resource('ticket', AdminTicketController::class);
+        Route::resource('tickets', AdminTicketController::class);
 
     });
 
