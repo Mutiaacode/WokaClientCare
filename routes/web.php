@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Teknisi\TeknisiDashboardController;
+use App\Http\Controllers\Teknisi\TeknisiTicketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
@@ -62,4 +64,14 @@ Route::middleware(['auth', 'role:client'])
             ->name('contract.approve');
 
         Route::resource('ticket', ClientTicketController::class);    
+    });
+
+Route::middleware(['auth', 'role:teknisi'])
+    ->prefix('teknisi')
+    ->name('teknisi.')
+    ->group(function () {
+
+        Route::get('/dashboard', [TeknisiDashboardController::class, 'index'])
+            ->name('dashboard');
+        Route::resource('ticket', TeknisiTicketController::class);
     });
