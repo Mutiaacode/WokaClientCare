@@ -45,7 +45,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('admin.ticket.index') }}">
+                        <a class="sidebar-link" href="{{ route('admin.tickets.index') }}">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">Tickets</span>
                         </a>
@@ -95,7 +95,7 @@
                         </a>
                     </li>   
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('client.tickets.index') }}">
+                        <a class="sidebar-link" href="">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">Tickets</span>
                         </a>
