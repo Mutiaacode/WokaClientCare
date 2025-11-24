@@ -45,10 +45,15 @@ Route::middleware(['auth', 'role:client'])
     ->group(function () {
         Route::get('/dashboard', [ClientDashboardController::class, 'index'])
             ->name('dashboard');
+
+        Route::resource('contracts', ClientContractController::class);    
         Route::get('/contract', [ClientContractController::class, 'index'])
             ->name('contract.index');     
         Route::get('/contract/{id}', [ClientContractController::class, 'show'])
-            ->name('contract.show');       
+            ->name('contract.show');  
+        Route::post('/contract/{id}/approve', [ClientContractController::class, 'approve'])
+    ->name('contract.approve');
+         
     });
 
 
