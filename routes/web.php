@@ -38,11 +38,11 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
             ->name('dashboard');
 
-        Route::resource('client', AdminClientController::class);
+        Route::resource('clients', AdminClientController::class);
         Route::resource('product', AdminProductController::class);
         Route::resource('users', AdminUserController::class);
-        Route::resource('contracts', AdminContractController::class);
-        Route::resource('tickets', AdminTicketController::class);
+        Route::resource('contract', AdminContractController::class);
+        Route::resource('ticket', AdminTicketController::class);
 
     });
 
