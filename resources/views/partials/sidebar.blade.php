@@ -113,7 +113,8 @@
                         </a>
                     </li>
                 @endif
-
+                
+                {{-- Tambahkan di paling bawah --}}
                 <hr class="my-3">
                 <li class="sidebar-item mt-auto">
                     <form action="{{ route('logout') }}" method="POST">
