@@ -45,16 +45,9 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('admin.tickets.index') }}">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">Tickets</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
-                            <i class="ti ti-history"></i>
-                            <span class="hide-menu">Ticket Logs</span>
                         </a>
                     </li>
 
@@ -89,27 +82,27 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('client.contract.index')  }}">
+                        <a class="sidebar-link" href="{{ route('client.contract.index') }}">
                             <i class="ti ti-file-text"></i>
                             <span class="hide-menu">Contracts</span>
                         </a>
-                    </li>   
+                    </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('client.ticket.index') }}">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">Tickets</span>
                         </a>
                     </li>
-                     <li class="sidebar-item">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="#">
-                            <i class="ti ti-ticket"></i>
+                            <i class="ti ti-receipt"></i>
                             <span class="hide-menu">Invoice</span>
                         </a>
                     </li>
-                     <li class="sidebar-item">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="#">
-                            <i class="ti ti-ticket"></i>
-                            <span class="hide-menu">Maintenan</span>
+                            <i class="ti ti-tools"></i>
+                            <span class="hide-menu">Maintenance</span>
                         </a>
                     </li>
                 @endif
@@ -137,7 +130,6 @@
 
                 {{-- Tambahkan di paling bawah --}}
                 <hr class="my-3">
-
                 <li class="sidebar-item mt-auto">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -150,7 +142,17 @@
                     </form>
                 </li>
 
+                <hr class="my-3">
+                <li class="sidebar-item mt-auto px-3">
+                    <div class="p-3" style="border-radius: 12px; background: #f7f7f7;">
+                        <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
+                        <small class="text-muted d-block" style="font-size: 12px;">
+                            {{ ucfirst(auth()->user()->role) }}
+                        </small>
+                    </div>
+                </li>
             </ul>
         </nav>
     </div>
+
 </aside>
