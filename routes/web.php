@@ -12,10 +12,13 @@ use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminContractController;
 use App\Http\Controllers\Admin\AdminTicketController;
+use App\Http\Controllers\Admin\AdminInvoiceController;
+
 
 
 use App\Http\Controllers\Client\ClientContractController;
 use App\Http\Controllers\Client\ClientDashboardController;
+use App\Http\Controllers\Client\ClientTicketController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffTiketController;
 
@@ -47,6 +50,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('users', AdminUserController::class);
         Route::resource('contract', AdminContractController::class);
         Route::resource('tickets', AdminTicketController::class);
+        Route::resource('invoices', AdminInvoiceController::class);
     });
 
 Route::middleware(['auth', 'role:client'])
@@ -61,6 +65,7 @@ Route::middleware(['auth', 'role:client'])
             ->name('contract.index');
         Route::get('/contract/{id}', [ClientContractController::class, 'show'])
             ->name('contract.show');
+        Route::resource('ticket', ClientTicketController::class);
     });
 
 Route::middleware(['auth', 'role:teknisi'])
