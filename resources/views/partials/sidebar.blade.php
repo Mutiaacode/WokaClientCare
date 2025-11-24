@@ -95,21 +95,21 @@
                         </a>
                     </li>   
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('client.tickets.index') }}">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">Tickets</span>
                         </a>
                     </li>
                      <li class="sidebar-item">
                         <a class="sidebar-link" href="#">
-                            <i class="ti ti-ticket"></i>
+                            <i class="ti ti-receipt"></i>
                             <span class="hide-menu">Invoice</span>
                         </a>
                     </li>
                      <li class="sidebar-item">
                         <a class="sidebar-link" href="#">
-                            <i class="ti ti-ticket"></i>
-                            <span class="hide-menu">Maintenan</span>
+                            <i class="ti ti-tools"></i>
+                            <span class="hide-menu">Maintenance</span>
                         </a>
                     </li>
                 @endif
