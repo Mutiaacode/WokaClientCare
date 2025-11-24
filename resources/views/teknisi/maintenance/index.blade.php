@@ -20,23 +20,19 @@
                         <th>Contract</th>
                         <th>Staf</th>
                         <th>Teknisi</th>
-                        <th>Prioritas</th>
-                        <th>Status</th>
                         <th width="180px">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tickets as $ticket)
+                    @foreach ($maintenance as $m)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $ticket->contract->client->name }}</td>
-                            <td>{{ $ticket->contract->nomor_kontrak }}</td>
-                            <td>{{ $ticket->staf->name }}</td>
-                            <td>{{ $ticket->teknisi->name }}</td>
-                            <td class="text-center">{{ $ticket->prioritas }}</td>
-                            <td class="text-center">{{ $ticket->status }}</td>
+                            <td>{{ $m->contract->client->name }}</td>
+                            <td>{{ $m->contract->nomor_kontrak }}</td>
+                            <td>{{ $m->staf->name }}</td>
+                            <td>{{ $m->teknisi->name }}</td>
                             <td class="text-center">
-                                <a href="{{ route('teknisi.ticket.show', $ticket->id) }}"
+                                <a href="{{ route('teknisi.maintenance.show', $m->id) }}"
                                     class="btn btn-sm btn-info text-white">Detail</a>
                             </td>
                         </tr>
