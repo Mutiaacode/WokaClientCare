@@ -38,7 +38,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
             ->name('dashboard');
 
-        Route::resource('clients', AdminClientController::class);
+        Route::resource('client', AdminClientController::class);
         Route::resource('product', AdminProductController::class);
         Route::resource('users', AdminUserController::class);
         Route::resource('contract', AdminContractController::class);
