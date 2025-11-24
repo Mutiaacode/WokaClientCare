@@ -41,7 +41,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('client', AdminClientController::class);
         Route::resource('product', AdminProductController::class);
         Route::resource('users', AdminUserController::class);
-        Route::resource('contract', AdminContractController::class);
+        Route::resource('contracts', AdminContractController::class);
         Route::resource('tickets', AdminTicketController::class);
 
     });
