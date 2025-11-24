@@ -25,4 +25,19 @@ class ClientContractController extends Controller
         return view('client.contract.show', compact('contract'));
     }
 
+    public function approve($id)
+{
+    $contract = Contract::where('id', $id)
+        ->where('client_id', Auth::user()->client->id)
+        ->firstOrFail();
+
+    // update status
+    $contract->status = 'aktif';
+    $contract->save();
+
+    return redirect()->route('client.contract.index')
+        ->with('success', 'Kontrak berhasil di ACC.');
+}
+
+
 }
