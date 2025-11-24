@@ -7,8 +7,12 @@ use App\Http\Controllers\Admin\AdminClientController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminContractController;
+use App\Http\Controllers\Admin\AdminTicketController;
+
+
 use App\Http\Controllers\Client\ClientContractController;
 use App\Http\Controllers\Client\ClientDashboardController;
+
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -37,6 +41,8 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('product', AdminProductController::class);
         Route::resource('users', AdminUserController::class);
         Route::resource('contract', AdminContractController::class);
+        Route::resource('ticket', AdminTicketController::class);
+
     });
 
 Route::middleware(['auth', 'role:client'])
@@ -56,4 +62,4 @@ Route::middleware(['auth', 'role:client'])
          
     });
 
-
+ 
