@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Teknisi\TeknisiDashboardController;
+use App\Http\Controllers\Teknisi\TeknisiMaintenanceController;
 use App\Http\Controllers\Teknisi\TeknisiTicketController;
 
 use Illuminate\Support\Facades\Route;
@@ -46,7 +47,6 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('users', AdminUserController::class);
         Route::resource('contract', AdminContractController::class);
         Route::resource('tickets', AdminTicketController::class);
-       
     });
 
 Route::middleware(['auth', 'role:client'])
@@ -71,8 +71,8 @@ Route::middleware(['auth', 'role:teknisi'])
         Route::get('/dashboard', [TeknisiDashboardController::class, 'index'])
             ->name('dashboard');
         Route::resource('ticket', TeknisiTicketController::class);
-});
-
+        Route::resource('maintenance', TeknisiMaintenanceController::class);
+    });
 
 
 Route::middleware(['auth', 'role:staff'])

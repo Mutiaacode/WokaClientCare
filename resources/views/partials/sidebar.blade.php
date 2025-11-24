@@ -120,6 +120,10 @@
                             <span class="hide-menu">Tickets</span>
                         </a>
                     </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('teknisi.maintenance.index') }}">
+                            <i class="ti ti-tools"></i>
+                            <span class="hide-menu">Maintenance</span>
                      <li class="sidebar-item">
                         <a class="sidebar-link" href="#">
                             <i class="ti ti-ticket"></i>
