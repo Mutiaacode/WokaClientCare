@@ -143,8 +143,8 @@
 
     {{-- AKTIVITAS --}}
     <div class="card shadow-sm rounded-4 border-0 mb-4">
-        <div class="card-header bg-light">
-            <strong>Aktivitas Terbaru</strong>
+        <div class="card-header bg-primary">
+            <strong class="text-white">Aktivitas Terbaru</strong>
         </div>
         <ul class="list-group list-group-flush">
             @foreach ($recentActivities as $act)
