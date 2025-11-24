@@ -50,7 +50,7 @@ Route::middleware(['auth', 'role:client'])
     ->prefix('client')
     ->name('client.')
     ->group(function () {
-        Route::get('/dashboard', [ClientDashboardController::class, 'index'])
+        Route::get('/dashboards', [ClientDashboardController::class, 'index'])
             ->name('dashboard');
 
         Route::resource('contracts', ClientContractController::class);
