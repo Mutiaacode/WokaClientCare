@@ -35,7 +35,7 @@ Route::middleware(['auth', 'role:admin'])
     ->name('admin.')
     ->group(function () {
 
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+        Route::get('/dashboards', [AdminDashboardController::class, 'index'])
             ->name('dashboard');
 
         Route::resource('clients', AdminClientController::class);
