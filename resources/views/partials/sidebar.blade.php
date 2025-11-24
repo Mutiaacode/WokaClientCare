@@ -114,6 +114,26 @@
                     </li>
                 @endif
 
+                   @if (auth()->user()->role === 'staff')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('staff.dashboard') }}">
+                            <i class="ti ti-layout-dashboard"></i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('staff.tickets.index') }}">
+                            <i class="ti ti-ticket"></i>
+                            <span class="hide-menu">Tickets</span>
+                        </a>
+                    </li>
+                     <li class="sidebar-item">
+                        <a class="sidebar-link" href="#">
+                            <i class="ti ti-ticket"></i>
+                            <span class="hide-menu">Invoice</span>
+                        </a>
+                    </li>
+                @endif
 
                 {{-- Tambahkan di paling bawah --}}
                 <hr class="my-3">
