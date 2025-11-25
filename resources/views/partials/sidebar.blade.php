@@ -120,6 +120,12 @@
                             <span class="hide-menu">Tickets</span>
                         </a>
                     </li>
+                      <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('staff.invoices.index') }}">
+                            <i class="ti ti-ticket"></i>
+                            <span class="hide-menu">invoices</span>
+                        </a>
+                    </li>
                 @endif
 
                 {{-- ================= TEKNISI ================= --}}
