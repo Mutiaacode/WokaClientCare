@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 
 class AdminClientController extends Controller
 {
@@ -23,12 +24,10 @@ class AdminClientController extends Controller
 
     public function store(Request $request)
     {
-
-        $validated = $request->validate([
-
+        $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'email' => 'required|email|unique:users,email',
+            'password'  => 'required|min:6',
 
             'nama_usaha' => 'required|max:255',
             'nomor_hp' => 'nullable|max:20',
@@ -36,36 +35,35 @@ class AdminClientController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
             'role' => 'client',
         ]);
 
         Client::create([
             'user_id' => $user->id,
-            'nama_usaha' => $validated['nama_usaha'],
-            'nomor_hp' => $validated['nomor_hp'] ?? null,
-            'alamat' => $validated['alamat'] ?? null,
+            'nama_usaha' => $request->nama_usaha,
+            'nomor_hp' => $request->nomor_hp,
+            'alamat'  => $request->alamat,
         ]);
 
         return redirect()->route('admin.clients.index')->with('sukses', 'Client baru berhasil ditambahkan!');
     }
 
-    public function edit($id)
+    public function edit(Client $client)
     {
-        $client = Client::with('user')->findOrFail($id);
+        $client->load('user');
         return view('admin.clients.edit', compact('client'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Client $client)
     {
-        $client = Client::with('user')->findOrFail($id);
+        $user = $client->user;
 
-        $validated = $request->validate([
-
+        $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email|unique:users,email,' . $client->user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:6',
 
             'nama_usaha' => 'required|max:255',
@@ -73,27 +71,27 @@ class AdminClientController extends Controller
             'alamat' => 'nullable|string',
         ]);
 
-        $client->user->update([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => !empty($validated['password'])
-                ? Hash::make($validated['password'])
-                : $client->user->password,
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $user->password,
         ]);
 
         $client->update([
-            'nama_usaha' => $validated['nama_usaha'],
-            'nomor_hp' => $validated['nomor_hp'],
-            'alamat' => $validated['alamat'],
+            'nama_usaha' => $request->nama_usaha,
+            'nomor_hp' => $request->nomor_hp,
+            'alamat' => $request->alamat,
         ]);
 
         return redirect()->route('admin.clients.index')->with('sukses', 'Data client berhasil diperbarui!');
     }
 
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        $client = Client::with('user')->findOrFail($id);
-
         $client->user->delete();
         $client->delete();
 

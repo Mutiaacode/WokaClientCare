@@ -1,8 +1,8 @@
 <aside class="left-sidebar" data-sidebarbg="skin6">
     <div class="scroll-sidebar" data-simplebar>
 
-        <div class="py-4 mt-3 text-center">
-            <img src="{{ asset('assets/images/woka1.png') }}" alt="Woka Care Logo" style="width: 140px;">
+        <div class="py-4 mt-3 ">
+            <img src="{{ asset('assets/images/woka2.png') }}" alt="Woka Care Logo" style="width: 170px;">
         </div>
 
         <nav class="sidebar-nav">
@@ -98,9 +98,16 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('client.invoice.index') }}">
                             <i class="ti ti-receipt"></i>
                             <span class="hide-menu">Invoices</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('client.invoice.index') }}">
+                            <i class="ti ti-tools"></i>
+                            <span class="hide-menu">Maintenance</span>
                         </a>
                     </li>
                 @endif
@@ -118,6 +125,12 @@
                         <a class="sidebar-link" href="{{ route('staff.tickets.index') }}">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">Tickets</span>
+                        </a>
+                    </li>
+                      <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('staff.invoices.index') }}">
+                            <i class="ti ti-ticket"></i>
+                            <span class="hide-menu">invoices</span>
                         </a>
                     </li>
                 @endif

@@ -15,35 +15,37 @@ class AdminTicketController extends Controller
         return view('admin.tickets.index', compact('tickets'));
     }
 
-    public function show($id)
+    public function show(Ticket $ticket)
     {
-        $ticket = Ticket::with(['client.user'])->findOrFail($id);
+        $ticket->load(['client.user']);
         $staff = User::where('role', 'staff')->get();
 
         return view('admin.tickets.show', compact('ticket', 'staff'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Ticket $ticket)
     {
-        $ticket = Ticket::findOrFail($id);
-
         $request->validate([
-            'assigned_staff_id' => 'nullable|exists:users,id',
-            'status' => 'required|in:open,in_progress,waiting_tech,resolved,closed'
+            'staff_id' => 'nullable|exists:users,id',
+            'status'=> 'required|in:open,in_progress,waiting_tech,resolved,closed',
         ]);
 
         $ticket->update([
-            'assigned_staff_id' => $request->assigned_staff_id,
-            'status'            => $request->status,
+            'staff_id' => $request->staff_id,
+            'status' => $request->status,
         ]);
 
-        return redirect()->route('admin.tickets.show', $ticket->id)
-                         ->with('sukses', 'Tiket berhasil diperbarui.');
+        return redirect()
+            ->route('admin.tickets.show', $ticket->id)
+            ->with('sukses', 'Tiket berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function destroy(Ticket $ticket)
     {
-        Ticket::destroy($id);
-        return redirect()->route('admin.tickets.index')->with('sukses', 'Tiket berhasil dihapus.');
+        $ticket->delete();
+
+        return redirect()
+            ->route('admin.tickets.index')
+            ->with('sukses', 'Tiket berhasil dihapus.');
     }
 }

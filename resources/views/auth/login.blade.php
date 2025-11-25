@@ -23,8 +23,8 @@
                             <div class="card-body">
 
                                 <a href="#" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="{{ asset('assets/images/woka1.png') }}" alt="Woka Care Logo"
-                                    style="width: 160px; height: auto;">
+                                    <img src="{{ asset('assets/images/woka2.png') }}" alt="Woka Care Logo"
+                                    style="width: 180px; height: auto;">
                                 </a>
 
 
@@ -68,7 +68,7 @@
                                     </div>
 
                                     <!-- Submit button -->
-                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">
+                                    <button type="submit" class="btn btn-woka w-100 py-8 fs-4 mb-4 rounded-2 text-white">
                                         Login
                                     </button>
 
