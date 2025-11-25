@@ -21,6 +21,7 @@ use App\Http\Controllers\Client\ClientDashboardController;
 use App\Http\Controllers\Client\ClientInvoiceController;
 use App\Http\Controllers\Client\ClientTicketController;
 use App\Http\Controllers\Staff\StaffDashboardController;
+use App\Http\Controllers\Staff\StaffTicketController;
 use App\Http\Controllers\Staff\StaffTiketController;
 
 Route::get('/', function () {
@@ -97,19 +98,9 @@ Route::middleware(['auth', 'role:staff'])
     ->prefix('staff')
     ->name('staff.')
     ->group(function () {
-
         Route::get('/dashboard', [StaffDashboardController::class, 'index'])
             ->name('dashboard');
-
-        Route::get('/tickets', [StaffTiketController::class, 'index'])
-            ->name('tickets.index');
-
-        Route::get('/tickets/{id}', [StaffTiketController::class, 'show'])
-            ->name('tickets.show');
-
-        Route::post('/tickets/{id}/start', [StaffTiketController::class, 'start'])
-            ->name('tickets.start');
-
-        Route::post('/tickets/{id}/assign', [StaffTiketController::class, 'assignTechnician'])
-            ->name('tickets.assign');
+        Route::get('/tickets', [StaffTicketController::class, 'index'])->name('tickets.index');
+        Route::get('/tickets/{id}', [StaffTicketController::class, 'show'])->name('tickets.show');
+        Route::post('/tickets/{id}/status', [StaffTicketController::class, 'updateStatus'])->name('tickets.updateStatus');
     });
