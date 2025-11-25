@@ -85,9 +85,9 @@ Route::middleware(['auth', 'role:staff'])
     ->prefix('staff')
     ->name('staff.')
     ->group(function () {
-        Route::get('/dashboard', StaffDashboardController::class, 'index')
+        Route::get('/dashboard', [StaffDashboardController::class, 'index'])
             ->name('dashboard');
-        Route::get('/tickets', StaffTicketController::class, 'index')->name('tickets.index');
-        Route::get('/tickets/{id}', StaffTicketController::class, 'show')->name('tickets.show');
-        Route::post('/tickets/{id}/status', StaffTicketController::class, 'updateStatus')->name('tickets.updateStatus');
+        Route::get('/tickets', [StaffTicketController::class, 'index'])->name('tickets.index');
+        Route::get('/tickets/{id}', [StaffTicketController::class, 'show'])->name('tickets.show');
+        Route::post('/tickets/{id}/status', [StaffTicketController::class, 'updateStatus'])->name('tickets.updateStatus');
     });

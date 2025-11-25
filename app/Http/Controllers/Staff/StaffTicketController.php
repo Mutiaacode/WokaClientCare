@@ -12,7 +12,7 @@ class StaffTicketController extends Controller
  
     public function index()
     {
-        $tickets = Ticket::where('assigned_to', Auth::id())
+        $tickets = Ticket::where('teknisi_id', Auth::id())
             ->orderBy('created_at', 'DESC')
             ->get();
 
@@ -22,7 +22,7 @@ class StaffTicketController extends Controller
   
     public function show($id)
     {
-        $ticket = Ticket::where('assigned_to', Auth::id())->findOrFail($id);
+        $ticket = Ticket::where('teknisi_id', Auth::id())->findOrFail($id);
 
         return view('staff.tickets.show', compact('ticket'));
     }
