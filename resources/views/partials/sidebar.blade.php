@@ -98,11 +98,19 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('client.invoice.index') }}">
                             <i class="ti ti-receipt"></i>
                             <span class="hide-menu">Invoices</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('client.invoice.index') }}">
+                            <i class="ti ti-tools"></i>
+                            <span class="hide-menu">Maintenance</span>
+                        </a>
+                    </li>
+
                 @endif
 
                 {{-- ================= STAFF ================= --}}
