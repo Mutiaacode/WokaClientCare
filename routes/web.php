@@ -23,6 +23,8 @@ use App\Http\Controllers\Client\ClientTicketController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffTicketController;
 use App\Http\Controllers\Staff\StaffTiketController;
+use App\Http\Controllers\Staff\StaffInvoiceController;
+
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -104,3 +106,28 @@ Route::middleware(['auth', 'role:staff'])
         Route::get('/tickets/{id}', [StaffTicketController::class, 'show'])->name('tickets.show');
         Route::post('/tickets/{id}/status', [StaffTicketController::class, 'updateStatus'])->name('tickets.updateStatus');
     });
+
+
+Route::middleware(['auth', 'role:staff'])
+    ->prefix('staff')
+    ->name('staff.')
+    ->group(function () {
+
+        Route::get('/invoices', [StaffInvoiceController::class, 'index'])->name('invoices.index');
+        Route::get('/invoices/create', [StaffInvoiceController::class, 'create'])->name('invoices.create');
+        Route::post('/invoices/store', [StaffInvoiceController::class, 'store'])->name('invoices.store');
+
+        Route::get('/invoices/{id}', [StaffInvoiceController::class, 'show'])->name('invoices.show');
+        Route::get('/invoices/{id}/edit', [StaffInvoiceController::class, 'edit'])->name('invoices.edit');
+        Route::put('/invoices/{id}', [StaffInvoiceController::class, 'update'])->name('invoices.update');
+
+        Route::post('/invoices/{id}/status', [StaffInvoiceController::class, 'updateStatus'])->name('invoices.status');
+    });
+
+
+
+
+
+
+
+
