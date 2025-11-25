@@ -12,7 +12,26 @@
         </div>
 
         <div>
-            
+            <div class="col-12">
+                <label class="fw-semibold"></label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $maintenance-> }}</div>
+            </div>
+            <div class="col-12">
+                <label class="fw-semibold"></label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $maintenance-> }}</div>
+            </div>
+            <div class="col-12">
+                <label class="fw-semibold"></label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $maintenance-> }}</div>
+            </div>
+            <div class="col-12">
+                <label class="fw-semibold"></label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $maintenance-> }}</div>
+            </div>
+            <div class="col-12">
+                <label class="fw-semibold"></label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $maintenance-> }}</div>
+            </div>
         </div>
     </div>
 

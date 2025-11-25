@@ -11,8 +11,31 @@
             </a>
         </div>
 
-        <div>
-            
+        <div class="row g-4">
+            <div class="col-md-6">
+                <label class="fw-semibold">Client:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->client->nama_usaha ?? '-' }}</div>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-semibold">Staff Pengirim:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->staff->name ?? '-' }}</div>
+            </div>
+            <div class="col-12">
+                <label class="fw-semibold">Judul Masalah:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->judul }}</div>
+            </div>
+            <div class="col-12">
+                <label class="fw-semibold">Tingkat Prioritas:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->prioritas }}</div>
+            </div>
+            <div class="col-12">
+                <label class="fw-semibold">Status Ticket:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->status }}</div>
+            </div>
+            <div class="col-12">
+                <label class="fw-semibold">Deskripsi Masalah:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->deskripsi }}</div>
+            </div>
         </div>
     </div>
 
