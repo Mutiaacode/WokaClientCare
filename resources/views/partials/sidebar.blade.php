@@ -2,7 +2,7 @@
     <div class="scroll-sidebar" data-simplebar>
 
         <div class="py-4 mt-3 ">
-            <img src="{{ asset('assets/images/woka2.png') }}" alt="Woka Care Logo" style="width: 170px;">
+            <img src="{{ asset('assets/images/woka2.png') }}" alt="Woka Care Logo" style="width: 200px;">
         </div>
 
         <nav class="sidebar-nav">
@@ -159,7 +159,7 @@
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit"
-                            class="sidebar-link btn w-100 text-start d-flex align-items-center px-3 border-0 bg-transparent">
+                            class=" btn w-100 text-start d-flex align-items-center px-3 border-0 bg-transparent">
                             <i class="ti ti-logout me-2"></i>
                             <span class="hide-menu">Logout</span>
                         </button>

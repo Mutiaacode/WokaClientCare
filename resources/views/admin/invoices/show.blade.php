@@ -19,6 +19,15 @@ invoices admin baru @extends('layouts.app')
                         <h1 class="invoice-title text-white">INVOICE</h1>
                         <p class="mb-0">#INV-{{ $invoice->id }}</p>
                         <p class="mb-0">Tanggal: {{ date('d/m/Y', strtotime($invoice->created_at)) }}</p>
+                        <p class="mb-0">
+                            Tanggal Terbit:
+                            {{ date('d/m/Y', strtotime($invoice->tanggal_terbit)) }}
+                        </p>
+
+                        <p class="mb-0">
+                            Jatuh Tempo:
+                            {{ date('d/m/Y', strtotime($invoice->tanggal_jatuh_tempo)) }}
+                        </p>
                     </div>
                 </div>
             </div>
