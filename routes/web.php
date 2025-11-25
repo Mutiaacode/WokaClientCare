@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\AdminInvoiceController;
 
 use App\Http\Controllers\Client\ClientContractController;
 use App\Http\Controllers\Client\ClientDashboardController;
+use App\Http\Controllers\Client\ClientInvoiceController;
 use App\Http\Controllers\Client\ClientTicketController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffTiketController;
@@ -65,7 +66,19 @@ Route::middleware(['auth', 'role:client'])
             ->name('contract.index');
         Route::get('/contract/{id}', [ClientContractController::class, 'show'])
             ->name('contract.show');
+
         Route::resource('ticket', ClientTicketController::class);
+
+         Route::get('/invoice', [ClientInvoiceController::class, 'index'])
+            ->name('invoice.index');
+
+        Route::get('/invoice/{id}', [ClientInvoiceController::class, 'show'])
+            ->name('invoice.show');
+
+        Route::post('/invoice/{id}/upload', [ClientInvoiceController::class, 'uploadPayment'])
+            ->name('invoice.upload');
+
+
     });
 
 Route::middleware(['auth', 'role:teknisi'])
