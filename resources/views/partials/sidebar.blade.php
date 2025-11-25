@@ -1,8 +1,8 @@
 <aside class="left-sidebar" data-sidebarbg="skin6">
     <div class="scroll-sidebar" data-simplebar>
 
-        <div class="py-4 mt-3 text-center">
-            <img src="{{ asset('assets/images/woka1.png') }}" alt="Woka Care Logo" style="width: 140px;">
+        <div class="py-4 mt-3 ">
+            <img src="{{ asset('assets/images/woka2.png') }}" alt="Woka Care Logo" style="width: 170px;">
         </div>
 
         <nav class="sidebar-nav">
@@ -110,7 +110,6 @@
                             <span class="hide-menu">Maintenance</span>
                         </a>
                     </li>
-
                 @endif
 
                 {{-- ================= STAFF ================= --}}

@@ -19,6 +19,66 @@
 
     <!-- GLOBAL STYLE OVERRIDES -->
     <style>
+        .invoice-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+        }
+
+        .invoice-body {
+            padding: 30px;
+        }
+
+        .invoice-footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .company-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .invoice-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .amount-highlight {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .status-badge {
+            font-size: 14px;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .detail-row {
+            border-bottom: 1px solid #e9ecef;
+            padding: 15px 0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .watermark {
+            position: absolute;
+            opacity: 0.03;
+            font-size: 120px;
+            transform: rotate(-45deg);
+            z-index: 0;
+            top: 30%;
+            left: 10%;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
         /* ─── Global Font ───────────────────────────── */
 
 
@@ -97,8 +157,10 @@
     <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/dist/simplebar.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-    @stack('scripts')
+@stack('scripts')
 </body>
 
 </html>
