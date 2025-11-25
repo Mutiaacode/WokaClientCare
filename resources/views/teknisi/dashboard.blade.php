@@ -8,38 +8,20 @@
 
     {{-- TOP CARDS --}}
     <div class="row mb-4">
-        <div class="col-md-3 mb-3">
+        <div class="col-md-6 mb-6">
             <div class="card border-0 shadow rounded-4">
                 <div class="card-body">
-                    <h6 class="text-primary">Jumlah Ticket</h6>
-                    <h3 class="fw-bold"></h3>
+                    <h6 class="text-primary">Total Ticket</h6>
+                    <h3 class="fw-bold">{{ $totalTickets }}</h3>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3 mb-3">
+        <div class="col-md-6 mb-6">
             <div class="card border-0 shadow rounded-4">
                 <div class="card-body">
-                    <h6 class="text-primary">Jumlah Invoice</h6>
-                    <h3 class="fw-bold"></h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 mb-3">
-            <div class="card border-0 shadow rounded-4">
-                <div class="card-body">
-                    <h6 class="text-primary"></h6>
-                    <h3 class="fw-bold"></h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 mb-3">
-            <div class="card border-0 shadow rounded-4">
-                <div class="card-body">
-                    <h6 class="text-primary"></h6>
-                    <h3 class="fw-bold"></h3>
+                    <h6 class="text-primary">Total Maintenance</h6>
+                    <h3 class="fw-bold">{{ $totalMaintenances }}</h3>
                 </div>
             </div>
         </div>

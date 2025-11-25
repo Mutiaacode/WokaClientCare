@@ -150,6 +150,13 @@
                             <span class="hide-menu">Maintenance</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('teknisi.ticket.index') }}">
+                            <i class="ti ti-ticket"></i>
+                            <span class="hide-menu">Ticket</span>
+                        </a>
+                    </li>
                 @endif
 
                 {{-- ================= LOGOUT ================= --}}
