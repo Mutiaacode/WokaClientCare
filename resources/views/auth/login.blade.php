@@ -24,7 +24,7 @@
 
                                 <a href="#" class="text-nowrap logo-img text-center d-block py-3 w-100">
                                     <img src="{{ asset('assets/images/woka2.png') }}" alt="Woka Care Logo"
-                                    style="width: 180px; height: auto;">
+                                    style="width: 220px; height: auto;">
                                 </a>
 
 

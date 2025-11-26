@@ -3,82 +3,80 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
     public function index()
     {
-
         $users = User::whereIn('role', ['admin', 'staff', 'teknisi'])->get();
         return view('admin.user.index', compact('users'));
     }
 
     public function create()
     {
-        return view('admin.user.create', [
-            'roles' => ['admin', 'staff', 'teknisi'],
-        ]);
+        return view('admin.user.create');
     }
 
     public function store(Request $request)
     {
-
-        $validated = $request->validate([
+        $request->validate([
             'name'     => 'required|max:255',
-            'email'    => 'required|email|unique:users',
+            'email'    => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'role'     => 'required|in:admin,staff,teknisi',
         ]);
 
         User::create([
-            'name'     => $validated['name'],
-            'email'    => $validated['email'],
-            'password' => Hash::make($validated['password']),
-            'role'     => $validated['role'],
-            
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
+            'role'     => $request->role,
         ]);
 
-        return redirect()->route('admin.users.index')->with('sukses', 'User berhasil ditambahkan!');
+        return redirect()->route('admin.users.index')
+            ->with('sukses', 'User berhasil ditambahkan!');
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
         return view('admin.user.edit', [
-            'user'  => User::findOrFail($id),
+            'user'  => $user,
             'roles' => ['admin', 'staff', 'teknisi'],
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-        $validated = $request->validate([
-            'name'  => 'required|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+        $request->validate([
+            'name'     => 'required|max:255',
+            'email'    => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:6',
-            'role'  => 'required|in:admin,staff,teknisi',
+            'role'     => 'required|in:admin,staff,teknisi',
         ]);
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
 
         $user->update([
-            'name'  => $validated['name'],
-            'email' => $validated['email'],
-            'password' => !empty($validated['password'])
-                ? Hash::make($validated['password'])
-                : $user->password,
-            'role'  => $validated['role'],
-           
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => $user->password,
+            'role'     => $request->role,
         ]);
 
-        return redirect()->route('admin.users.index')->with('sukses', 'User berhasil diperbarui!');
+        return redirect()->route('admin.users.index')
+            ->with('sukses', 'User berhasil diperbarui!');
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::destroy($id);
+        $user->delete();
 
-        return redirect()->route('admin.users.index')->with('sukses', 'User berhasil dihapus!');
+        return redirect()->route('admin.users.index')
+            ->with('sukses', 'User berhasil dihapus!');
     }
 }
