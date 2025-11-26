@@ -7,7 +7,7 @@
     <title>@yield('title', 'Dashboard')</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/wokalog.svg') }}" />
 
     <!-- THEME CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
@@ -20,7 +20,7 @@
     <!-- GLOBAL STYLE OVERRIDES -->
     <style>
         .invoice-header {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
+            background: linear-gradient(135deg, #2c3e50, #3991A2);
             color: white;
             padding: 30px;
         }

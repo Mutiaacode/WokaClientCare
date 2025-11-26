@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminContractController;
 use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\Admin\AdminInvoiceController;
+use App\Http\Controllers\Admin\AdminPaymentController;
+
 
 
 
@@ -55,6 +57,8 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('contract', AdminContractController::class);
         Route::resource('tickets', AdminTicketController::class);
         Route::resource('invoices', AdminInvoiceController::class);
+        Route::resource('payment', AdminPaymentController::class);
+        Route::post('payments/{id}/verify', [AdminPaymentController::class, 'verify'])->name('payments.verify');
     });
 
 Route::middleware(['auth', 'role:client'])
@@ -69,10 +73,12 @@ Route::middleware(['auth', 'role:client'])
             ->name('contract.index');
         Route::get('/contract/{id}', [ClientContractController::class, 'show'])
             ->name('contract.show');
+        Route::post('/contract/{id}/approve', [ClientContractController::class, 'approve'])
+            ->name('contract.approve');
 
         Route::resource('ticket', ClientTicketController::class);
 
-         Route::get('/invoice', [ClientInvoiceController::class, 'index'])
+        Route::get('/invoice', [ClientInvoiceController::class, 'index'])
             ->name('invoice.index');
 
         Route::get('/invoice/{id}', [ClientInvoiceController::class, 'show'])
@@ -81,7 +87,8 @@ Route::middleware(['auth', 'role:client'])
         Route::post('/invoice/{id}/upload', [ClientInvoiceController::class, 'uploadPayment'])
             ->name('invoice.upload');
 
-
+        Route::get('/invoice/{id}/pay', [ClientInvoiceController::class, 'pay'])
+    ->name('invoice.pay'); // <-- halaman upload
     });
 
 Route::middleware(['auth', 'role:teknisi'])
@@ -106,9 +113,3 @@ Route::middleware(['auth', 'role:staff'])
         Route::resource('tickets', StaffTicketController::class);
         Route::resource('invoices', StaffInvoiceController::class);
     });
-
-
-
-
-
-
