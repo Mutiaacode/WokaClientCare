@@ -31,6 +31,17 @@
             </div>
             <form action="{{ route('staff.tickets.update', $ticket->id) }}" method="POST">
                 @csrf @method('PUT')
+                <div class="mb-3">
+                    <label>Assign ke Teknisi</label>
+                    <select name="teknisi_id" class="form-control">
+                        <option value="">--- Tidak Assign ---</option>
+                        @foreach ($teknisi as $t)
+                            <option value="{{ $t->id }}"@selected($ticket->teknisi_id == $t->id)>
+                                {{ $t->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-12">
                     <label class="fw-semibold">Status Ticket:</label>
                     <select name="status" class="form-control border rounded px-3 py-2 bg-light" required>

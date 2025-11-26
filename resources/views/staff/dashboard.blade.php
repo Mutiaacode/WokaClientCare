@@ -13,7 +13,7 @@
                 <div class="card border-0 shadow rounded-4">
                     <div class="card-body">
                         <h6 class="text-primary">Total Ticket</h6>
-                        <h3 class="fw-bold"></h3>
+                        <h3 class="fw-bold">{{ $totalTickets     }}</h3>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="card border-0 shadow rounded-4">
                     <div class="card-body">
                         <h6 class="text-primary">Total ivoices</h6>
-                        <h3 class="fw-bold"></h3>
+                        <h3 class="fw-bold">{{ $totalInvoices }}</h3>
                     </div>
                 </div>
             </div>
