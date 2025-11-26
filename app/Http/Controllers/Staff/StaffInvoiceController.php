@@ -13,7 +13,7 @@ class StaffInvoiceController extends Controller
     // LIST semua invoice yang dibuat staff
     public function index()
     {
-        $invoices = Invoice::where('tanggal_terbit', auth()->id())->paginate(10);
+        $invoices = Invoice::all();
         return view('staff.invoices.index', compact('invoices'));
     }
 
@@ -46,7 +46,7 @@ class StaffInvoiceController extends Controller
         Invoice::create($data);
 
         return redirect()->route('staff.invoices.index')
-                         ->with('success', 'Invoice berhasil dibuat!');
+            ->with('success', 'Invoice berhasil dibuat!');
     }
 
     // TAMPIL DETAIL
@@ -85,21 +85,15 @@ class StaffInvoiceController extends Controller
         $invoice->update($data);
 
         return redirect()->route('staff.invoices.show', $invoice->id)
-                         ->with('success', 'Invoice berhasil diperbarui!');
+            ->with('success', 'Invoice berhasil diperbarui!');
     }
 
-    // UPDATE STATUS
-    public function updateStatus(Request $request, $id)
+    public function destroy($id)
     {
         $invoice = Invoice::findOrFail($id);
+        $invoice->delete();
 
-        $request->validate([
-            'status' => 'required|in:draft,pending,paid,cancelled'
-        ]);
-
-        $invoice->status = $request->status;
-        $invoice->save();
-
-        return back()->with('success', 'Status invoice berhasil diubah!');
+        return redirect()->route('staff.invoices.index')
+            ->with('success', 'Invoice berhasil dihapus!');
     }
 }

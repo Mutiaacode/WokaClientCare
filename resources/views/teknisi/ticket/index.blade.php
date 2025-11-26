@@ -18,9 +18,6 @@
                         <th>No</th>
                         <th>Client</th>
                         <th>Contract</th>
-                        <th>Staf</th>
-                        <th>Teknisi</th>
-                        <th>Prioritas</th>
                         <th>Status</th>
                         <th width="180px">Aksi</th>
                     </tr>
@@ -29,11 +26,8 @@
                     @foreach ($tickets as $ticket)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $ticket->contract->client->name }}</td>
-                            <td>{{ $ticket->contract->nomor_kontrak }}</td>
-                            <td>{{ $ticket->staf->name }}</td>
-                            <td>{{ $ticket->teknisi->name }}</td>
-                            <td class="text-center">{{ $ticket->prioritas }}</td>
+                            <td class="text-center">{{ $ticket->client->user->name }}</td>
+                            <td class="text-center">{{ $ticket->contract->nomor_kontrak }}</td>
                             <td class="text-center">{{ $ticket->status }}</td>
                             <td class="text-center">
                                 <a href="{{ route('teknisi.ticket.show', $ticket->id) }}"

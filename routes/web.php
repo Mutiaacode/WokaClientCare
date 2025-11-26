@@ -109,24 +109,7 @@ Route::middleware(['auth', 'role:staff'])
     ->group(function () {
         Route::get('/dashboard', [StaffDashboardController::class, 'index'])
             ->name('dashboard');
-        Route::get('/tickets', [StaffTicketController::class, 'index'])->name('tickets.index');
-        Route::get('/tickets/{id}', [StaffTicketController::class, 'show'])->name('tickets.show');
-        Route::post('/tickets/{id}/status', [StaffTicketController::class, 'updateStatus'])->name('tickets.updateStatus');
-    });
 
-
-Route::middleware(['auth', 'role:staff'])
-    ->prefix('staff')
-    ->name('staff.')
-    ->group(function () {
-
-        Route::get('/invoices', [StaffInvoiceController::class, 'index'])->name('invoices.index');
-        Route::get('/invoices/create', [StaffInvoiceController::class, 'create'])->name('invoices.create');
-        Route::post('/invoices/store', [StaffInvoiceController::class, 'store'])->name('invoices.store');
-
-        Route::get('/invoices/{id}', [StaffInvoiceController::class, 'show'])->name('invoices.show');
-        Route::get('/invoices/{id}/edit', [StaffInvoiceController::class, 'edit'])->name('invoices.edit');
-        Route::put('/invoices/{id}', [StaffInvoiceController::class, 'update'])->name('invoices.update');
-
-        Route::post('/invoices/{id}/status', [StaffInvoiceController::class, 'updateStatus'])->name('invoices.status');
+        Route::resource('tickets', StaffTicketController::class);
+        Route::resource('invoices', StaffInvoiceController::class);
     });

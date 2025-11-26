@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ class StaffTicketController extends Controller
  
     public function index()
     {
-        $tickets = Ticket::where('teknisi_id', Auth::id())
+        $tickets = Ticket::where('staff_id', Auth::id())
             ->orderBy('created_at', 'DESC')
             ->get();
 
@@ -22,35 +23,27 @@ class StaffTicketController extends Controller
   
     public function show($id)
     {
-        $ticket = Ticket::where('teknisi_id', Auth::id())->findOrFail($id);
-
-        return view('staff.tickets.show', compact('ticket'));
+        $ticket = Ticket::where('staff_id', Auth::id())->findOrFail($id);
+        $teknisi = User::where('role', 'teknisi')->get();
+        return view('staff.tickets.show', compact('ticket', 'teknisi'));
     }
 
 
-    public function updateStatus(Request $request, $id)
+    public function update(Request $request, Ticket $ticket)
     {
         $request->validate([
-            'status' => 'required|in:open,in_progress,completed',
-            'catatan' => 'nullable|string',
-            'bukti' => 'nullable|image|max:2048'
+            'teknisi_id' => 'nullable|exists:users,id',
+            'status'=> 'required|in:open,in_progress,resolved,closed',
         ]);
-
-        $ticket = Ticket::where('assigned_to', Auth::id())->findOrFail($id);
-
-
-        $buktiPath = $ticket->bukti ?? null;
-
-        if ($request->hasFile('bukti')) {
-            $buktiPath = $request->file('bukti')->store('ticket_bukti', 'public');
-        }
 
         $ticket->update([
+            'teknisi_id' => $request->teknisi_id,
             'status' => $request->status,
-            'catatan_staff' => $request->catatan,
-            'bukti' => $buktiPath,
         ]);
 
-        return redirect()->route('staff.tickets.index')->with('sukses', 'Status tiket berhasil diperbarui!');
+        return redirect()
+            ->route('staff.tickets.index')
+            ->with('sukses', 'Tiket berhasil diperbarui.');
+        
     }
 }

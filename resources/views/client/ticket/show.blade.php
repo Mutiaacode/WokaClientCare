@@ -12,6 +12,7 @@
         </a>
     </div>
 
+    {{-- ROW 1 --}}
     <div class="row mb-4">
 
         {{-- Judul Tiket --}}
@@ -37,13 +38,14 @@
 
     <hr>
 
+    {{-- ROW 2 --}}
     <div class="row mb-4">
 
-        {{-- Kontrak Terkait --}}
+        {{-- Kontrak --}}
         <div class="col-md-6 mb-3">
             <label class="text-muted small">Kontrak</label>
             <div class="fw-semibold">
-                {{ $ticket->contract->nomor_kontrak }} —
+                {{ $ticket->contract->nomor_kontrak }} — 
                 {{ $ticket->contract->product->nama_produk }}
             </div>
         </div>
@@ -65,7 +67,33 @@
 
     <hr>
 
-    {{-- Deskripsi --}}
+    {{-- STAFF --}}
+    @if ($ticket->staff_id)
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <label class="text-muted small">Diterima Oleh Staff</label>
+            <div class="fw-semibold">
+                {{ $ticket->staff->name }}
+            </div>
+        </div>
+    </div>
+    @endif
+
+    {{-- TEKNISI --}}
+    @if ($ticket->teknisi_id)
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <label class="text-muted small">Teknisi yang Menangani</label>
+            <div class="fw-semibold">
+                {{ $ticket->teknisi->name }}
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <hr>
+
+    {{-- DESKRIPSI --}}
     <div class="mb-4">
         <label class="text-muted small">Deskripsi Masalah</label>
         <div class="fw-semibold">{{ $ticket->deskripsi }}</div>
@@ -73,7 +101,7 @@
 
     <hr>
 
-    {{-- Lampiran --}}
+    {{-- LAMPIRAN --}}
     <div>
         <label class="text-muted small">Lampiran</label><br>
         @if ($ticket->lampiran)

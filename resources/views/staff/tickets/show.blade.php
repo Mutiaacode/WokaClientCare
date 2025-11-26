@@ -1,44 +1,71 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h3>Detail Tiket #{{ $ticket->id }}</h3>
 
-    <div class="card p-3 mt-3">
-        <h4>{{ $ticket->title }}</h4>
-        <p>{{ $ticket->description }}</p>
-        <p>Status: <b>{{ $ticket->status }}</b></p>
+    <div class="card shadow border-0 rounded-4 p-4">
 
-        {{-- open -> in_progress --}}
-        @if($ticket->status == 'open')
-        <form action="{{ route('staff.tickets.start',$ticket->id) }}" method="POST">
-            @csrf
-            <button class="btn btn-warning">Mulai Ticket</button>
-        </form>
-        @endif
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0">Detail Ticket</h4>
+        </div>
 
-        {{-- in_progress -> waiting_tech --}}
-        @if($ticket->status == 'in_progress')
-        <h4 class="mt-4">Assign Teknisi</h4>
-
-        <form action="{{ route('staff.tickets.assign',$ticket->id) }}" method="POST">
-            @csrf
-
-            <label class="mt-2">Pilih Teknisi</label>
-            <select name="technician_id" class="form-control">
-                @foreach($technicians as $tech)
-                <option value="{{ $tech->id }}">{{ $tech->name }}</option>
-                @endforeach
-            </select>
-
-            <label class="mt-3">Catatan</label>
-            <textarea name="log" class="form-control" required></textarea>
-
-            <button class="btn btn-success mt-3">Kirim ke Teknisi</button>
-        </form>
-        @endif
-
+        <div class="row g-4">
+            <div class="col-md-6">
+                <label class="fw-semibold">Nama Client:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->client->user->name ?? '-' }}</div>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-semibold">Jenis Usaha Client:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->client->nama_usaha ?? '-' }}</div>
+            </div>
+            <div class="col-6">
+                <label class="fw-semibold">Judul Masalah:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->judul }}</div>
+            </div>
+            <div class="col-6">
+                <label class="fw-semibold">Nomor Contrac:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->contract->nomor_kontrak }}</div>
+            </div>
+            <div class="col-12">
+                <label class="fw-semibold">Tingkat Prioritas:</label>
+                <div class="border rounded px-3 py-2 bg-light">{{ $ticket->prioritas }}</div>
+            </div>
+            <form action="{{ route('staff.tickets.update', $ticket->id) }}" method="POST">
+                @csrf @method('PUT')
+                <div class="mb-3">
+                    <label>Assign ke Teknisi</label>
+                    <select name="teknisi_id" class="form-control">
+                        <option value="">--- Tidak Assign ---</option>
+                        @foreach ($teknisi as $t)
+                            <option value="{{ $t->id }}"@selected($ticket->teknisi_id == $t->id)>
+                                {{ $t->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label class="fw-semibold">Status Ticket:</label>
+                    <select name="status" class="form-control border rounded px-3 py-2 bg-light" required>
+                        <option value="open" @selected($ticket->status == 'open')>Open</option>
+                        <option value="in_progress" @selected($ticket->status == 'in_progress')>In Progress</option>
+                        <option value="resolved" @selected($ticket->status == 'resolved')>Selesai</option>
+                        <option value="closed" @selected($ticket->status == 'closed')>Closed</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label class="fw-semibold mt-4">Deskripsi Masalah:</label>
+                    <div class="border rounded px-3 py-2 bg-light">{{ $ticket->deskripsi }}</div>
+                </div>
+                <div class="d-flex align-items-center mb-4 mt-4">
+                    <a href="{{ route('staff.tickets.index') }}" class="btn btn-secondary">
+                        <i class="ti ti-arrow-left"></i> Kembali
+                    </a>
+                    <button class="btn btn-primary ms-2">
+                        <i class="ti ti-device-floppy"></i> Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-</div>
+
 @endsection

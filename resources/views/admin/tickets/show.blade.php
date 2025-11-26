@@ -9,7 +9,7 @@
         <h4 class="fw-bold mb-4">Detail Tiket</h4>
 
         <div class="mb-3"><strong>Judul:</strong> {{ $ticket->judul }}</div>
-        <div class="mb-3"><strong>Deskripsi:</strong><br> {!! nl2br(e($ticket->deskripsi)) !!}</div>
+        <div class="mb-3"><strong>Deskripsi:</strong> {!! nl2br(e($ticket->deskripsi)) !!}</div>
         <div class="mb-3"><strong>Client:</strong> {{ $ticket->client->user->name }}</div>
         <div class="mb-3"><strong>Status:</strong> {{ ucfirst($ticket->status) }}</div>
 
