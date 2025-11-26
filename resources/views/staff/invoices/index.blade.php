@@ -1,38 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h3>Invoice Staff</h3>
+    @if (session('sukses'))
+        <div class="alert alert-success mt-3 px-4">{{ session('sukses') }}</div>
+    @endif
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Client</th>
-                <th>Jumlah</th>
-                <th>Status</th>
-                <th>Jatuh Tempo</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
+    <div class="card shadow border-0 rounded-3">
+        <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-3 rounded-top">
+            <h4 class="mb-0 text-white">Data Invoice</h4>
+        </div>
 
-        <tbody>
-            @foreach($invoices as $inv)
-            <tr>
-                <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $inv->client->name }}</td>
-                <td>Rp {{ number_format($inv->amount) }}</td>
-                <td><span class="badge bg-info">{{ $inv->status }}</span></td>
-                <td>{{ $inv->due_date }}</td>
-                <td>
-                    <a href="{{ route('staff.invoices.show', $inv->id) }}" class="btn btn-sm btn-info">Detail</a>
-                    <a href="{{ route('staff.invoices.edit', $inv->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+        <div class="table-responsive p-3">
+            <table class="table table-hover table-bordered align-middle mb-0">
+                <thead class="table-primary text-center">
+                    <tr>
+                        <th>No</th>
+                        <th>Client</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Tanggal</th>
+                        <th width="150px">Aksi</th>
+                    </tr>
+                </thead>
 
-    {{ $invoices->links() }}
-</div>
+                <tbody>
+                    @foreach ($invoices as $inv)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $inv->contract->client->user->name }}</td>
+                            <td class="text-center">Rp {{ number_format($inv->total, 0, ',', '.') }}</td>
+                            <td class="text-center">{{ ucfirst($inv->status) }}</td>
+                            <td class="text-center">{{ $inv->created_at->format('d-m-Y') }}</td>
+
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ route('staff.invoices.show', $inv->id) }}"
+                                        class="btn btn-info btn-sm text-white">Detail</a>
+
+                                    <form action="{{ route('staff.invoices.destroy', $inv->id) }}" method="POST">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Hapus invoice ini?')">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+
+            </table>
+        </div>
+    </div>
 @endsection

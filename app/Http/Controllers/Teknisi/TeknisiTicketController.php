@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teknisi;
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TeknisiTicketController extends Controller
@@ -18,7 +19,7 @@ class TeknisiTicketController extends Controller
     public function show($id)
     {
         $ticket = Ticket::findOrFail($id);
-        return view('teknisi.tickets.show', compact('ticket'));
+        return view('teknisi.ticket.show', compact('ticket'));
     }
 
     public function updateStatus(Request $request, $id)

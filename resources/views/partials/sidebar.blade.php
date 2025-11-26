@@ -129,7 +129,7 @@
                     </li>
                       <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('staff.invoices.index') }}">
-                            <i class="ti ti-ticket"></i>
+                            <i class="ti ti-receipt"></i>
                             <span class="hide-menu">invoices</span>
                         </a>
                     </li>
