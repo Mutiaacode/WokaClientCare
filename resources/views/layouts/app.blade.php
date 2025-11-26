@@ -7,7 +7,7 @@
     <title>@yield('title', 'Dashboard')</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/wokalog.svg') }}" />
 
     <!-- THEME CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
