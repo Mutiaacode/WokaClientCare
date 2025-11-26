@@ -29,7 +29,7 @@
                             <td>{{ $p->invoice->status }}</td>
 
                             <td class="text-center">
-                                <a href="{{ route('admin.payment.show', $p->id) }}"
+                                <a href="{{ route('admin.payments.show', $p->id) }}"
                                     class="btn btn-info btn-sm text-white">Detail</a>
                             </td>
                         </tr>

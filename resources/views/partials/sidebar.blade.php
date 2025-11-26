@@ -60,7 +60,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{route('admin.payment.index')}}">
+                        <a class="sidebar-link" href="{{ route('admin.payments.index') }}">
                             <i class="ti ti-credit-card"></i>
                             <span class="hide-menu">Payments</span>
                         </a>
@@ -127,7 +127,7 @@
                             <span class="hide-menu">Tickets</span>
                         </a>
                     </li>
-                      <li class="sidebar-item">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('staff.invoices.index') }}">
                             <i class="ti ti-ticket"></i>
                             <span class="hide-menu">invoices</span>

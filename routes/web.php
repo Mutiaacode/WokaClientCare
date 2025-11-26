@@ -57,7 +57,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('contract', AdminContractController::class);
         Route::resource('tickets', AdminTicketController::class);
         Route::resource('invoices', AdminInvoiceController::class);
-        Route::resource('payment', AdminPaymentController::class);
+        Route::resource('payments', AdminPaymentController::class);
         Route::post('payments/{id}/verify', [AdminPaymentController::class, 'verify'])->name('payments.verify');
     });
 
