@@ -73,6 +73,8 @@ Route::middleware(['auth', 'role:client'])
             ->name('contract.index');
         Route::get('/contract/{id}', [ClientContractController::class, 'show'])
             ->name('contract.show');
+        Route::post('/contract/{id}/approve', [ClientContractController::class, 'approve'])
+            ->name('contract.approve');
 
         Route::resource('ticket', ClientTicketController::class);
 
@@ -84,6 +86,9 @@ Route::middleware(['auth', 'role:client'])
 
         Route::post('/invoice/{id}/upload', [ClientInvoiceController::class, 'uploadPayment'])
             ->name('invoice.upload');
+
+        Route::get('/invoice/{id}/pay', [ClientInvoiceController::class, 'pay'])
+    ->name('invoice.pay'); // <-- halaman upload
     });
 
 Route::middleware(['auth', 'role:teknisi'])
