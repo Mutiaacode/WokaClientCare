@@ -14,7 +14,7 @@
         <div class="col-md-4 mb-3">
             <div class="card border-0 shadow rounded-4">
                 <div class="card-body">
-                    <h6 class="text-primary">Kontrak Aktif</h6>
+                    <h6 class="text-dark">Kontrak Aktif</h6>
                     <h3 class="fw-bold">0</h3>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <div class="col-md-4 mb-3">
             <div class="card border-0 shadow rounded-4">
                 <div class="card-body">
-                    <h6 class="text-primary">Tiket Aktif</h6>
+                    <h6 class="text-dark">Tiket Aktif</h6>
                     <h3 class="fw-bold">0</h3>
                 </div>
             </div>
@@ -32,7 +32,7 @@
         <div class="col-md-4 mb-3">
             <div class="card border-0 shadow rounded-4">
                 <div class="card-body">
-                    <h6 class="text-primary">Invoice Belum Dibayar</h6>
+                    <h6 class="text-dark">Invoice Belum Dibayar</h6>
                     <h3 class="fw-bold">0</h3>
                 </div>
             </div>
@@ -45,17 +45,17 @@
             Tiket Terbaru
         </div>
         <ul class="list-group list-group-flush">
-            
-                <li class="list-group-item">
-                    <strong>judul</strong>
-                    <span class="badge bg-info text-dark ms-2">status</span>
-                    <a href="#" class="btn btn-sm btn-outline-primary float-end">
-                        Lihat
-                    </a>
-                </li>
-        
-                <li class="list-group-item text-muted">Belum ada tiket yang dibuat.</li>
-           
+
+            <li class="list-group-item">
+                <strong>judul</strong>
+                <span class="badge bg-info text-dark ms-2">status</span>
+                <a href="#" class="btn btn-sm btn-outline-primary float-end">
+                    Lihat
+                </a>
+            </li>
+
+            <li class="list-group-item text-muted">Belum ada tiket yang dibuat.</li>
+
         </ul>
     </div>
 
@@ -65,14 +65,14 @@
             Maintenance Terdekat
         </div>
         <ul class="list-group list-group-flush">
-           
-                <li class="list-group-item">
-                    jadwal maintenance
-                    <span class="badge bg-dark float-end">status</span>
-                </li>
-           
-                <li class="list-group-item text-muted">Tidak ada jadwal maintenance terdekat.</li>
-          
+
+            <li class="list-group-item">
+                jadwal maintenance
+                <span class="badge bg-dark float-end">status</span>
+            </li>
+
+            <li class="list-group-item text-muted">Tidak ada jadwal maintenance terdekat.</li>
+
         </ul>
     </div>
 
