@@ -4,8 +4,6 @@
 <div class="container">
     <h3>Invoice Staff</h3>
 
-    <a href="{{ route('staff.invoices.create') }}" class="btn btn-primary mb-3">+ Buat Invoice</a>
-
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -21,7 +19,7 @@
         <tbody>
             @foreach($invoices as $inv)
             <tr>
-                <td>{{ $inv->number }}</td>
+                <td class="text-center">{{ $loop->iteration }}</td>
                 <td>{{ $inv->client->name }}</td>
                 <td>Rp {{ number_format($inv->amount) }}</td>
                 <td><span class="badge bg-info">{{ $inv->status }}</span></td>

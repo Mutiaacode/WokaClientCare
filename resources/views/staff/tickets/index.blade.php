@@ -6,7 +6,7 @@
 
     <table class="table table-bordered mt-3">
         <tr>
-            <th>ID</th>
+            <th>No</th>
             <th>Judul</th>
             <th>Status</th>
             <th>Aksi</th>
@@ -14,7 +14,7 @@
 
         @foreach($tickets as $t)
         <tr>
-            <td>{{ $t->id }}</td>
+            <td class="text-center">{{ $loop->iteration }}</td>
             <td>{{ $t->title }}</td>
             <td>{{ $t->status }}</td>
             <td><a href="{{ route('staff.tickets.show',$t->id) }}" class="btn btn-info btn-sm">Detail</a></td>
