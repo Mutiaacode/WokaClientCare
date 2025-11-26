@@ -58,4 +58,12 @@ class ClientInvoiceController extends Controller
     return redirect()->back()
         ->with('success', 'Bukti pembayaran berhasil dikirim! Menunggu verifikasi admin.');
 }
+
+public function pay($id)
+{
+    $invoice = Invoice::with('payments')->findOrFail($id);
+
+    return view('client.invoice.pay', compact('invoice'));
+}
+
 }

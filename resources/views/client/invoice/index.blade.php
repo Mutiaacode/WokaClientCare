@@ -38,24 +38,29 @@
                         </span>
                     </td>
                     <td>{{ $inv->created_at->format('d-m-Y') }}</td>
-
                     <td class="text-center">
                         <div class="d-flex justify-content-center gap-2">
 
+                            {{-- Tombol Detail selalu ada --}}
                             <a href="{{ route('client.invoice.show', $inv->id) }}"
                                 class="btn btn-info btn-sm text-white">
                                 Detail
                             </a>
 
-                            @if($inv->status == 'unpaid')
-                            <a href="{{ route('client.invoice.show', $inv->id) }}"
-                                class="btn btn-success btn-sm">
-                                Bayar
-                            </a>
-                            @endif
+                            {{-- Tombol Bayar hanya muncul kalau status = unpaid --}}
+                         @if($inv->status == 'unpaid')
+<a href="{{ route('client.invoice.pay', $inv->id) }}" 
+   class="btn btn-success btn-sm">
+    Bayar
+</a>
+@endif
+
+
+
 
                         </div>
                     </td>
+
 
                 </tr>
                 @endforeach

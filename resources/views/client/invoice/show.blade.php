@@ -1,82 +1,116 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Invoice')
-
 @section('content')
+    <div class="container my-5">
+        <div class="invoice-container position-relative">
+            <!-- Watermark -->
+            <div class="watermark">INVOICE</div>
 
-@if (session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
+            <!-- Header -->
+            <div class="invoice-header">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="company-logo">WOKA PROJECT MANDIRI</div>
+                        <p class="mb-0 mt-2">Jl. Jambu, Tejosari Metro Timur</p>
+                        <p class="mb-0">Metro, Indonesia</p>
+                        <p class="mb-0">Telp: (021) 1234-5678</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <h1 class="invoice-title text-white">INVOICE</h1>
+                        <p class="mb-0">#INV-{{ $invoice->id }}</p>
+                        <p class="mb-0">Tanggal: {{ date('d/m/Y', strtotime($invoice->created_at)) }}</p>
+                        <p class="mb-0">
+                            Tanggal Terbit:
+                            {{ date('d/m/Y', strtotime($invoice->tanggal_terbit)) }}
+                        </p>
 
-<div class="card shadow border-0 rounded-4 p-4">
+                        <p class="mb-0">
+                            Jatuh Tempo:
+                            {{ date('d/m/Y', strtotime($invoice->tanggal_jatuh_tempo)) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="fw-bold mb-0">Detail Invoice</h4>
-        <a href="{{ route('client.invoice.index') }}" class="btn btn-secondary">
-            <i class="ti ti-arrow-left"></i> Kembali
-        </a>
-    </div>
+            <!-- Body -->
+            <div class="invoice-body position-relative" style="z-index: 1;">
+                <!-- Info Client -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5 class="fw-bold text-primary">Kepada:</h5>
+                        <p class="mb-1 fw-bold">{{ $invoice->contract->client->user->name }}</p>
+                        <p class="mb-1">Kontrak: {{ $invoice->contract->nomor_kontrak }}</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <h5 class="fw-bold text-primary">Status:</h5>
+                        <span class="status-badge bg-warning text-dark">{{ ucfirst($invoice->status) }}</span>
+                    </div>
+                </div>
 
-    <div class="mb-3">
-        <strong>Invoice:</strong> #INV-{{ $invoice->id }}
-    </div>
+                <!-- Rincian Pembayaran -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0 fw-bold">Rincian Pembayaran</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="detail-row px-4">
+                            <div class="row">
+                                <div class="col-6">Subtotal</div>
+                                <div class="col-6 text-end">Rp {{ number_format($invoice->subtotal, 0, ',', '.') }}</div>
+                            </div>
+                        </div>
+                        <div class="detail-row px-4">
+                            <div class="row">
+                                <div class="col-6">Pajak
+                                    ({{ $invoice->pajak > 0 ? round(($invoice->pajak / $invoice->subtotal) * 100, 2) : 0 }}%)
+                                </div>
+                                <div class="col-6 text-end">Rp {{ number_format($invoice->pajak, 0, ',', '.') }}</div>
+                            </div>
+                        </div>
+                        <div class="detail-row px-4 bg-light">
+                            <div class="row fw-bold">
+                                <div class="col-6">Total</div>
+                                <div class="col-6 text-end amount-highlight">Rp
+                                    {{ number_format($invoice->total, 0, ',', '.') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="mb-3">
-        <strong>Kontrak:</strong> {{ $invoice->contract->nomor_kontrak }}
-    </div>
+                <!-- Informasi Tambahan -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold text-primary">Metode Pembayaran:</h6>
+                        <p class="mb-2">Transfer Bank</p>
+                        <p class="mb-1">Bank: BRI</p>
+                        <p class="mb-1">No. Rekening: 123-456-7890</p>
+                        <p class="mb-1">Atas Nama: RAHMAN ARDI SAPUTRA</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold text-primary">Catatan:</h6>
+                        <p>Harap melakukan pembayaran sebelum tanggal jatuh tempo. Terima kasih atas kerjasamanya.</p>
+                    </div>
+                </div>
+            </div>
 
-    <div class="mb-3">
-        <strong>Total:</strong> 
-        <span class="fw-bold">Rp {{ number_format($invoice->total, 0, ',', '.') }}</span>
-    </div>
-
-    <div class="mb-3">
-        <strong>Status:</strong>
-        <span class="badge 
-            @if ($invoice->status == 'paid') bg-success
-            @else bg-danger
-            @endif
-        px-3 py-2">
-            {{ ucfirst($invoice->status) }}
-        </span>
-    </div>
-
-    <hr>
-
-    {{-- Tombol Download Invoice jika ada file --}}
-    @if($invoice->file_invoice)
-        <a href="{{ asset('storage/' . $invoice->file_invoice) }}"
-           class="btn btn-outline-primary w-100 mb-3 mt-2" target="_blank">
-            <i class="ti ti-download"></i> Download Invoice
-        </a>
-    @endif
-
-    {{-- Jika belum bayar --}}
-    @if ($invoice->status == 'unpaid')
-        <form action="{{ route('client.invoice.upload', $invoice->id) }}" method="POST"
-            enctype="multipart/form-data" class="mt-3">
-            @csrf
-            <label class="fw-semibold">Upload Bukti Pembayaran</label>
-            <input type="file" name="bukti_pembayaran" class="form-control" required>
-
-            <button class="btn btn-success w-100 mt-2"
-                onclick="return confirm('Kirim bukti pembayaran ini?')">
-                Kirim Pembayaran
-            </button>
-        </form>
-    @endif
-
-    {{-- Jika sudah upload bukti pembayaran --}}
-    @if ($invoice->payments->last() && $invoice->payments->last()->bukti_pembayaran)
-        <div class="mt-4">
-            <label class="fw-semibold">Bukti Pembayaran:</label><br>
-            <a href="{{ asset('storage/' . $invoice->payments->last()->bukti_pembayaran) }}"
-                class="btn btn-outline-dark w-100 mt-2" target="_blank">
-                Lihat Bukti Pembayaran
-            </a>
+            <!-- Footer -->
+            <div class="invoice-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0 text-muted">Terima kasih atas kepercayaan Anda</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="{{ route('client.invoice.index') }}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Kembali ke Daftar
+                        </a>
+                        <button class="btn btn-primary ms-2" onclick="window.print()">
+                            <i class="bi bi-printer"></i> Cetak Invoice
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    @endif
+    </div>
 
-</div>
-
+    </html>
 @endsection
