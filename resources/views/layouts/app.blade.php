@@ -20,7 +20,7 @@
     <!-- GLOBAL STYLE OVERRIDES -->
     <style>
         .invoice-header {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
+            background: linear-gradient(135deg, #2c3e50, #3991A2);
             color: white;
             padding: 30px;
         }
