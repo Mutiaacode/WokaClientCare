@@ -29,7 +29,15 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td class="text-center">{{ $inv->contract->client->user->name }}</td>
                             <td class="text-center">Rp {{ number_format($inv->total, 0, ',', '.') }}</td>
-                            <td class="text-center">{{ ucfirst($inv->status) }}</td>
+                            <td class="text-center">
+                                @if ($inv->status == 'paid')
+                                    <span class="badge bg-success">Paid</span>
+                                @elseif ($inv->status == 'unpaid')
+                                    <span class="badge bg-danger">Unpaid</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                @endif
+                            </td>
                             <td class="text-center">{{ $inv->created_at->format('d-m-Y') }}</td>
 
                             <td class="text-center">
@@ -39,8 +47,7 @@
 
                                     <form action="{{ route('staff.invoices.destroy', $inv->id) }}" method="POST">
                                         @csrf @method('DELETE')
-                                        <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Hapus invoice ini?')">
+                                        <button class="btn btn-danger btn-sm" onclick="return confirm('Hapus invoice ini?')">
                                             Hapus
                                         </button>
                                     </form>

@@ -17,7 +17,7 @@
                     <tr>
                         <th>No</th>
                         <th>Client</th>
-                        <th>Contract</th>
+                        <th>No Contract</th>
                         <th>Status</th>
                         <th width="180px">Aksi</th>
                     </tr>
@@ -28,7 +28,18 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td class="text-center">{{ $ticket->client->user->name }}</td>
                             <td class="text-center">{{ $ticket->contract->nomor_kontrak }}</td>
-                            <td class="text-center">{{ $ticket->status }}</td>
+                            <td class="text-center">
+                                @if (   $ticket->status == 'open')
+                                    <span class="badge bg-secondary">Open</span>
+                                @elseif ($ticket->status == 'in_progress')
+                                    <span class="badge bg-info">In Progress</span>
+                                @elseif ($ticket->status == 'resolved')
+                                    <span class="badge bg-success">Resolved</span>
+                                @else
+                                    <span class="badge bg-dark">Closed</span>
+                                
+                                @endif
+                            </td>
                             <td class="text-center">
                                 <a href="{{ route('staff.tickets.show', $ticket->id) }}"
                                     class="btn btn-sm btn-info text-white">Detail</a>
