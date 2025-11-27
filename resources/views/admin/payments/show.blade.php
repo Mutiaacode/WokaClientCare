@@ -52,7 +52,7 @@
         @endif
 
         <div class="text-end mt-3">
-            <a href="{{ route('admin.payment.index') }}" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('admin.payments.index') }}" class="btn btn-secondary">Kembali</a>
         </div>
 
     </div>
