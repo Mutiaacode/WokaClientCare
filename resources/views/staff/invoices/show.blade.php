@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-6 text-md-end">
                         <h5 class="fw-bold text-primary">Status:</h5>
-                        <span class="status-badge bg-warning text-dark">{{ ucfirst($invoice->status) }}</span>
+                        <span class="status-badge bg-danger text-white">{{ ucfirst($invoice->status) }}</span>
                     </div>
                 </div>
 
