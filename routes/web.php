@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\AdminContractController;
 use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\Admin\AdminInvoiceController;
 use App\Http\Controllers\Admin\AdminPaymentController;
-
+use App\Http\Controllers\Admin\AdminMaintenanceController;
 
 
 
@@ -57,6 +57,8 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('contract', AdminContractController::class);
         Route::resource('tickets', AdminTicketController::class);
         Route::resource('invoices', AdminInvoiceController::class);
+        Route::resource('maintenance', AdminMaintenanceController::class);
+
         Route::resource('payments', AdminPaymentController::class);
         Route::post('payments/{id}/verify', [AdminPaymentController::class, 'verify'])->name('payments.verify');
     });

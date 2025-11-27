@@ -17,7 +17,9 @@ class AdminUserController extends Controller
 
     public function create()
     {
-        return view('admin.user.create');
+        return view('admin.user.create', [
+            'roles' => ['admin', 'staff', 'teknisi'],
+        ]);
     }
 
     public function store(Request $request)
