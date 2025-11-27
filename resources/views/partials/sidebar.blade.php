@@ -67,7 +67,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" href="{{ route('admin.maintenance.index') }}">
                             <i class="ti ti-tools"></i>
                             <span class="hide-menu">Maintenance</span>
                         </a>
