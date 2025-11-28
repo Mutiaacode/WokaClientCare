@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\AdminMaintenanceController;
 use App\Http\Controllers\Client\ClientContractController;
 use App\Http\Controllers\Client\ClientDashboardController;
 use App\Http\Controllers\Client\ClientInvoiceController;
+use App\Http\Controllers\Client\ClientMaintenanceController;
 use App\Http\Controllers\Client\ClientTicketController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffTicketController;
@@ -91,6 +92,9 @@ Route::middleware(['auth', 'role:client'])
 
         Route::get('/invoice/{id}/pay', [ClientInvoiceController::class, 'pay'])
     ->name('invoice.pay'); // <-- halaman upload
+
+        Route::get('/maintenance', [ClientMaintenanceController::class, 'index'])
+            ->name('maintenance.index');
     });
 
 Route::middleware(['auth', 'role:teknisi'])
