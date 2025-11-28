@@ -71,6 +71,22 @@
     </div>
 
     {{-- MAINTENANCE TERDEKAT --}}
-    
+    <div class="card shadow-sm rounded-4 border-0 mb-4">
+        <div class="card-header bg-warning fw-semibold">
+            Maintenance Terdekat
+        </div>
+        <ul class="list-group list-group-flush">
+
+            @forelse($maintenances as $m)
+                <li class="list-group-item">
+                    {{ $m->tanggal }} — {{ $m->judul ?? 'Maintenance' }}
+                    <span class="badge bg-dark float-end">Terjadwal</span>
+                </li>
+            @empty
+                <li class="list-group-item text-muted">Tidak ada jadwal maintenance terdekat.</li>
+            @endforelse
+
+        </ul>
+    </div>
 
 @endsection

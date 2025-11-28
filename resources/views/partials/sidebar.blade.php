@@ -105,7 +105,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('client.invoice.index') }}">
+                        <a class="sidebar-link" href="{{ route('client.maintenance.index') }}">
                             <i class="ti ti-tools"></i>
                             <span class="hide-menu">Maintenance</span>
                         </a>

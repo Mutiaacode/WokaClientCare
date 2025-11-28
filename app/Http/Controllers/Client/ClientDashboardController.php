@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Contract;
 use App\Models\Ticket;
 use App\Models\Invoice;
-use App\Models\Maintenance;
+use App\Models\MaintenanceSchedule;
 
 class ClientDashboardController extends Controller
 {
@@ -15,7 +15,7 @@ class ClientDashboardController extends Controller
     {
         $clientId = Auth::user()->client->id;
 
-        // Hitung data untuk card
+        // CARD DATA
         $contractAktif = Contract::where('client_id', $clientId)
             ->where('status', 'aktif')
             ->count();
@@ -36,18 +36,20 @@ class ClientDashboardController extends Controller
             ->take(5)
             ->get();
 
-        // Maintenance terdekat (opsional, kalau tabelnya ada)
-        //$maintenanceTerdekat = Maintenance::where('client_id', $clientId)
-            //->orderBy('tanggal', 'ASC')
-            //->take(5)
-            //->get();
+        // Maintenance berdasarkan kontrak client
+        $maintenances = MaintenanceSchedule::whereHas('contract', function ($q) use ($clientId) {
+                $q->where('client_id', $clientId);
+            })
+            ->orderBy('tanggal_kunjungan', 'ASC')
+            ->take(5)
+            ->get();
 
         return view('client.dashboard', compact(
             'contractAktif',
             'ticketAktif',
             'invoiceBelumBayar',
             'tiketTerbaru',
-            //'maintenanceTerdekat'
+            'maintenances'
         ));
     }
 }
