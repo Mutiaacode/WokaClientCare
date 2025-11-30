@@ -112,7 +112,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('client.maintenance.index') }}">
+                        <a class="sidebar-link" href="{{ route('client.profile.index') }}">
                             <i class="ti ti-users"></i>
                             <span class="hide-menu">Profile</span>
                         </a>

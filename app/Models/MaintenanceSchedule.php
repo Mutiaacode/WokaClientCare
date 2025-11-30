@@ -18,6 +18,19 @@ class MaintenanceSchedule extends Model
         'catatan'
     ];
 
+    protected $appends = ['client_action'];
+
+    // Accessor kolom virtual
+    public function getClientActionAttribute()
+    {
+        // Logika: kalau status default, maka client belum pilih
+        if ($this->status == 'dijadwalkan') {
+            return 'pending'; // tombol aksi harus muncul
+        }
+
+        return 'done'; // aksi disembunyikan
+    }
+    
     public function contract()
     {
         return $this->belongsTo(Contract::class);
