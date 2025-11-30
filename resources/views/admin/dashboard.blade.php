@@ -3,7 +3,7 @@
 @section('content')
     {{-- HEADER --}}
     <div class="mb-4">
-        <p class="text-muted mb-0">Ringkasan data dalam sistem</p>
+        <p class="text-muted mb-0">Ringkasan data dalam sistem admin</p>
     </div>
 
     {{-- TOP CARDS --}}
@@ -11,7 +11,7 @@
         <div class="col-md-3 mb-3">
             <div class="card border-0 shadow rounded-4">
                 <div class="card-body">
-                    <h6 class="text-dark">Total Users</h6>
+                    <h6 class="text-primary">Total Users</h6>
                     <h3 class="fw-bold">{{ $totalUsers }}</h3>
                 </div>
             </div>
@@ -20,7 +20,7 @@
         <div class="col-md-3 mb-3">
             <div class="card border-0 shadow rounded-4">
                 <div class="card-body">
-                    <h6 class="text-dark">Clients</h6>
+                    <h6 class="text-primary">Clients</h6>
                     <h3 class="fw-bold">{{ $totalClients }}</h3>
                 </div>
             </div>
@@ -29,7 +29,7 @@
         <div class="col-md-3 mb-3">
             <div class="card border-0 shadow rounded-4">
                 <div class="card-body">
-                    <h6 class="text-dark">Produk / Layanan</h6>
+                    <h6 class="text-primary">Produk / Layanan</h6>
                     <h3 class="fw-bold">{{ $totalProducts }}</h3>
                 </div>
             </div>
@@ -38,7 +38,7 @@
         <div class="col-md-3 mb-3">
             <div class="card border-0 shadow rounded-4">
                 <div class="card-body">
-                    <h6 class="text-dark">Total Kontrak</h6>
+                    <h6 class="text-primary">Total Kontrak</h6>
                     <h3 class="fw-bold">{{ $totalContracts }}</h3>
                 </div>
             </div>
@@ -143,8 +143,8 @@
 
     {{-- AKTIVITAS --}}
     <div class="card shadow-sm rounded-4 border-0 mb-4">
-        <div class="card-header bg-primary">
-            <strong class="text-white">Aktivitas Terbaru</strong>
+        <div class="card-header bg-light">
+            <strong>Aktivitas Terbaru</strong>
         </div>
         <ul class="list-group list-group-flush">
             @foreach ($recentActivities as $act)
