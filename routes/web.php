@@ -21,6 +21,8 @@ use App\Http\Controllers\Admin\AdminMaintenanceController;
 use App\Http\Controllers\Client\ClientContractController;
 use App\Http\Controllers\Client\ClientDashboardController;
 use App\Http\Controllers\Client\ClientInvoiceController;
+use App\Http\Controllers\Client\ClientMaintenanceController;
+use App\Http\Controllers\Client\ClientProfileController;
 use App\Http\Controllers\Client\ClientTicketController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffTicketController;
@@ -90,7 +92,31 @@ Route::middleware(['auth', 'role:client'])
             ->name('invoice.upload');
 
         Route::get('/invoice/{id}/pay', [ClientInvoiceController::class, 'pay'])
-    ->name('invoice.pay'); // <-- halaman upload
+            ->name('invoice.pay'); // <-- halaman upload
+
+        Route::get('/maintenance', [ClientMaintenanceController::class, 'index'])
+            ->name('maintenance.index');
+
+        Route::post('/maintenance/{id}/accept', [ClientMaintenanceController::class, 'accept'])
+        ->name('maintenance.accept');
+
+
+        Route::post('/maintenance/{id}/reject', [ClientMaintenanceController::class, 'reject'])
+            ->name('maintenance.reject');
+
+        Route::middleware(['auth', 'role:client'])->group(function () {
+
+   Route::get('/profile', [ClientProfileController::class, 'index'])->name('profile.index');
+
+Route::get('/profile/edit', [ClientProfileController::class, 'edit'])->name('profile.edit');
+
+Route::post('/profile/update', [ClientProfileController::class, 'update'])->name('profile.update');
+
+Route::post('/profile/update-password', [ClientProfileController::class, 'updatePassword'])
+    ->name('profile.password');
+
+});
+    
     });
 
 Route::middleware(['auth', 'role:teknisi'])

@@ -13,8 +13,8 @@ class AdminMaintenanceController extends Controller
     public function index()
     {
         $maintenances = MaintenanceSchedule::with(['contract.client.user', 'teknisi'])
-                        ->latest()
-                        ->get();
+            ->latest()
+            ->get();
 
         return view('admin.maintenance.index', compact('maintenances'));
     }
@@ -30,20 +30,20 @@ class AdminMaintenanceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'contract_id'        => 'required|exists:contracts,id',
-            'teknisi_id'         => 'required|exists:users,id',
-            'tanggal_kunjungan'  => 'required|date',
-            'jam_kunjungan'      => 'required',
-            'catatan'            => 'nullable|string',
+            'contract_id' => 'required|exists:contracts,id',
+            'teknisi_id' => 'required|exists:users,id',
+            'tanggal_kunjungan' => 'required|date',
+            'jam_kunjungan' => 'required',
+            'catatan' => 'nullable|string',
         ]);
 
         MaintenanceSchedule::create([
-            'contract_id'       => $request->contract_id,
-            'teknisi_id'        => $request->teknisi_id,
+            'contract_id' => $request->contract_id,
+            'teknisi_id' => $request->teknisi_id,
             'tanggal_kunjungan' => $request->tanggal_kunjungan,
-            'jam_kunjungan'     => $request->jam_kunjungan,
-            'catatan'           => $request->catatan,
-            'status'            => 'dijadwalkan',
+            'jam_kunjungan' => $request->jam_kunjungan,
+            'catatan' => $request->catatan,
+            'status' => 'dijadwalkan',
         ]);
 
         return redirect()->route('admin.maintenance.index')
@@ -52,8 +52,7 @@ class AdminMaintenanceController extends Controller
 
     public function show($id)
     {
-        $maintenance = MaintenanceSchedule::with(['contract.client.user', 'teknisi'])
-                        ->findOrFail($id);
+        $maintenance = MaintenanceSchedule::with(['contract.client.user', 'teknisi'])->findOrFail($id);
 
         return view('admin.maintenance.show', compact('maintenance'));
     }
@@ -96,7 +95,6 @@ class AdminMaintenanceController extends Controller
         $maintenance = MaintenanceSchedule::findOrFail($id);
         $maintenance->delete();
 
-        return redirect()->route('admin.maintenance.index')
-            ->with('sukses', 'Maintenance berhasil dihapus.');
+        return redirect()->route('admin.maintenance.index')->with('sukses', 'Maintenance berhasil dihapus.');
     }
 }
