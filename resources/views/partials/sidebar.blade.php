@@ -105,9 +105,16 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('client.invoice.index') }}">
+                        <a class="sidebar-link" href="{{ route('client.maintenance.index') }}">
                             <i class="ti ti-tools"></i>
                             <span class="hide-menu">Maintenance</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('client.profile.index') }}">
+                            <i class="ti ti-users"></i>
+                            <span class="hide-menu">Profile</span>
                         </a>
                     </li>
                 @endif
