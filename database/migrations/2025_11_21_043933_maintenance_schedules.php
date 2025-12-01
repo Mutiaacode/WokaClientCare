@@ -20,7 +20,7 @@
             $table->date('tanggal_kunjungan');
             $table->time('jam_kunjungan');
 
-            $table->enum('status', ['dijadwalkan', 'selesai', 'dibatalkan'])
+            $table->enum('status', ['dijadwalkan', 'terima', 'selesai', 'dibatalkan'])
                 ->default('dijadwalkan');
 
             $table->text('catatan')->nullable();

@@ -10,7 +10,7 @@
 
 <div class="card shadow border-0 rounded-3">
     <div class="card-header bg-primary text-white py-3 rounded-top">
-        <h4 class="mb-0">Edit Profil</h4>
+        <h4 class="mb-0 text-white">Edit Profile</h4>
     </div>
 
     <div class="card-body px-4 py-4">

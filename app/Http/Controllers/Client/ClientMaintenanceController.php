@@ -24,6 +24,7 @@ class ClientMaintenanceController extends Controller
     $m = MaintenanceSchedule::findOrFail($id);
 
     // status tetap dijadwalkan
+    $m->status = 'terima';
     $m->save();
 
     // kasih flag bahwa client sudah aksi
