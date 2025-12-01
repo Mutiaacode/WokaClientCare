@@ -4,32 +4,35 @@
     <div class="card p-4 shadow">
         <h4 class="mb-4 fw-bold">Edit Jadwal Maintenance</h4>
 
-        <form action="{{ route('admin.maintenance.update', $maintenance->id) }}" method="POST">
+        <h4 class="mb-4">Buat Invoice</h4>
+
+        <form action="{{ route('admin.maintenance.store', $maintenance->id) }}" method="PUT">
             @csrf
-            @method('PUT')
-
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label>Teknisi</label>
-                    <select name="teknisi_id" class="form-control" required>
-                        @foreach ($teknisi as $t)
-                            <option value="{{ $t->id }}" {{ $maintenance->teknisi_id == $t->id ? 'selected' : '' }}>
-                                {{ $t->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <label>Status</label>
-                    <select name="status" class="form-control" required>
-                        <option value="dijadwalkan" {{ $maintenance->status == 'dijadwalkan' ? 'selected' : '' }}>
-                            Dijadwalkan</option>
-                        <option value="selesai" {{ $maintenance->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                        <option value="dibatalkan" {{ $maintenance->status == 'dibatalkan' ? 'selected' : '' }}>Dibatalkan
+            <div class="mb-3">
+                <label>Kontrak</label>
+                <select name="contract_id" class="form-control" required>
+                    <option value="">-- Pilih Kontrak --</option>
+                    @foreach ($contracts as $c)
+                        <option value="{{ $c->id }}">
+                            {{ $c->nomor_kontrak }} - {{ $c->client->user->name }}
                         </option>
-                    </select>
-                </div>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>teknisi</label>
+                <select name="teknisi_id" class="form-control" required>
+                    <option value="">-- Pilih Teknisi --</option>
+                    @foreach ($teknisi as $t)
+                        <option value="{{ $t->id }}">
+                            {{ $t->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="fw-semibold">Tanggal Kunjungan</label>
+                <input type="date" name="tanggal_kunjungan" class="form-control" required>
             </div>
 
             <div class="row">

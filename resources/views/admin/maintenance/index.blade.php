@@ -15,34 +15,21 @@
             <table class="table table-hover table-bordered align-middle mb-0">
                 <thead class="table-primary text-center">
                     <tr>
-                        <th>Kontrak</th>
-                        <th>Client</th>
-                        <th>Teknisi</th>
-                        <th>Tanggal</th>
-                        <th>Jam</th>
-                        <th>Status</th>
-                        <th width="160px">Aksi</th>
+                        <td>Contdact</td>
+                        <td>Nama Teknisi</td>
+                        <td>Status</td>
+                        <td>Catatan</td>
+                        <td>Aksi</td>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($maintenances as $m)
                         <tr>
-                            <td>{{ $m->contract->nomor_kontrak }}</td>
-                            <td>{{ $m->contract->client->user->name }}</td>
-                            <td>{{ $m->teknisi->name }}</td>
-                            <td>{{ $m->tanggal_kunjungan }}</td>
-                            <td>{{ $m->jam_kunjungan }}</td>
-
-                            <td>
-                                @if ($m->status == 'dijadwalkan')
-                                    <span class="badge bg-warning text-dark">Dijadwalkan</span>
-                                @elseif($m->status == 'selesai')
-                                    <span class="badge bg-success">Selesai</span>
-                                @else
-                                    <span class="badge bg-danger">Dibatalkan</span>
-                                @endif
-                            </td>
+                            <td class="text-center">{{ $m->contract->nomor_kontrak }}</td>
+                            <td class="text-center">{{ $m->teknisi->name }}</td>
+                            <td class="text-center">{{ $m->status }}</td>
+                            <td class="text-center">{{ $m->catatan }}</td>
 
                             <td class="text-center">
                                 <div class="d-flex justify-content-center gap-2">
