@@ -26,13 +26,15 @@ class TeknisiMaintenanceController extends Controller
      public function update(Request $request, $id)
     {
         $request->validate([
-            'catatan' => 'nullable|string'
+            'catatan' => 'nullable|string',
+            'status'  => 'string'
         ]);
 
         $maintenance = MaintenanceSchedule::findOrFail($id);
         $maintenance->catatan = $request->catatan;
+        $maintenance->status  = $request->status;
         $maintenance->save();
 
-        return back()->with('sukses', 'Catatan berhasil diperbarui!');
+        return redirect()->route('teknisi.maintenance.index')->with('sukses', 'Catatan berhasil diperbarui!');
     }
 }
