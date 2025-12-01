@@ -45,29 +45,34 @@
             </div>
         </div>
 
-        {{-- STATUS --}}
-        <div class="col-12">
-            <label class="fw-semibold">Status</label>
-            <div class="border rounded px-3 py-2 bg-light text-uppercase">
-                {{ $maintenance->status }}
-            </div>
-        </div>
+
         <form action="{{ route('teknisi.maintenance.update', $maintenance->id) }}" method="post">
             @csrf @method('PUT')
-             <div class="col-12">
-            <label class="fw-semibold mb-2">Catatan</label>
+            <div class="col-12">
 
-            <div class="d-flex gap-2">
-                <input type="text"
-                    name="catatan"
-                    class="border rounded px-3 py-2 bg-light form-control"
-                    placeholder="Tulis catatan teknisi di sini...">
+                {{-- STATUS --}}
+                <div class="col-12">
+                    <label class="fw-semibold">Status </label>
+                    <select name="status" class="form-control border rounded px-3 py-2 bg-light" required>
+                        <option value="dijadwalkan" @selected($maintenance->status == 'dijadwalkan')>dijadwalkan</option>
+                        <option value="selesai" @selected($maintenance->status == 'selesai')>selesai</option>
+                        <option value="dibatalkan" @selected($maintenance->status == 'dibatalkan')>dibatalkan</option>
+                    </select>
+                </div>
 
-                <button class="btn btn-primary px-4">
-                    Simpan
-                </button>
+
+                <label class="fw-semibold mb-2">Catatan</label>
+                <div class="d-flex gap-2">
+                    <input type="text"
+                        name="catatan"
+                        class="border rounded px-3 py-2 bg-light form-control"
+                        placeholder="Tulis catatan teknisi di sini...">
+
+                    <button class="btn btn-primary px-4">
+                        Simpan
+                    </button>
+                </div>
             </div>
-        </div>
         </form>
     </div>
 </div>

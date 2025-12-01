@@ -18,6 +18,7 @@
                         <th>No</th>
                         <th>Client</th>
                         <th>Contract</th>
+                        <th>status</th>
                         <th>Teknisi</th>
                         <th>Catatan</th>
                         <th width="180px">Aksi</th>
@@ -29,6 +30,7 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $m->contract->client->user->name }}</td>
                             <td>{{ $m->contract->nomor_kontrak }}</td>
+                            <td>{{ $m->status }}</td>
                             <td>{{ $m->teknisi->name }}</td>
                             <td>{{ $m->catatan }}</td>
                             <td class="text-center">

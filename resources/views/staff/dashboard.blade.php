@@ -27,15 +27,5 @@
                 </div>
             </div>
         </div>
-
-        <h4 class="mt-4">Tiket Log</h4>
-        <table class="table table-bordered mt-2">
-            <tr>
-                <th>No</th>
-                <th>Judul</th>
-                <th>Status</th>
-            </tr>
-        </table>
-
     </div>
 @endsection
