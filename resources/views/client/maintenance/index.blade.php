@@ -29,20 +29,10 @@
             <tbody>
                 @forelse ($maintenances as $m)
                 <tr>
-
                     <td class="text-center">{{ $m->contract->nomor_kontrak }}</td>
-
                     <td class="text-center">{{ $m->teknisi->name ?? 'Belum ditentukan' }}</td>
-
-                    <td class="text-center">
-                        {{ $m->tanggal_kunjungan ? date('d-m-Y', strtotime($m->tanggal_kunjungan)) : '-' }}
-                    </td>
-
-                    <td class="text-center">
-                        {{ $m->jam_kunjungan ? date('H:i', strtotime($m->jam_kunjungan)) : '-' }}
-                    </td>
-
-                    {{-- STATUS --}}
+                    <td class="text-center">{{ $m->tanggal_kunjungan ? date('d-m-Y', strtotime($m->tanggal_kunjungan)) : '-' }}</td>
+                    <td class="text-center">{{ $m->jam_kunjungan ? date('H:i', strtotime($m->jam_kunjungan)) : '-' }}</td>
                     <td class="text-center">
                         <span class="badge 
                             @if ($m->status == 'dijadwalkan') bg-info
@@ -54,61 +44,96 @@
                             {{ ucfirst($m->status) }}
                         </span>
                     </td>
-
-                    {{-- Aksi --}}
-                    {{-- Aksi --}}
                     <td class="text-center">
-
-                        @if ($m->client_has_acted)
-                        {{-- Sudah memilih -> hanya tampilkan detail --}}
-                        <a href="#" class="btn btn-info btn-sm text-white">Detail</a>
-
-                        @else
-
-                        @if ($m->status == 'dijadwalkan')
                         <div class="d-flex justify-content-center gap-2">
-
-                            {{-- Terima --}}
-                            <form action="{{ route('client.maintenance.accept', $m->id) }}" method="POST">
-                                @csrf
-                                <button class="btn btn-success btn-sm">
-                                    Terima
-                                </button>
-                            </form>
-
-                            {{-- Tolak --}}
-                            <form action="{{ route('client.maintenance.reject', $m->id) }}" method="POST">
-                                @csrf
-                                <button class="btn btn-danger btn-sm">
-                                    Tolak
-                                </button>
-                            </form>
-
-                            {{-- Detail --}}
-                            <a href="#" class="btn btn-info btn-sm text-white">Detail</a>
-
+                            @if (!$m->client_has_acted && $m->status == 'dijadwalkan')
+                                <form action="{{ route('client.maintenance.accept', $m->id) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-success btn-sm">Terima</button>
+                                </form>
+                                <form action="{{ route('client.maintenance.reject', $m->id) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm">Tolak</button>
+                                </form>
+                            @endif
+                            <button class="btn btn-info btn-sm text-white" data-bs-toggle="modal" data-bs-target="#detailModal-{{ $m->id }}">
+                                Detail
+                            </button>
                         </div>
-                        @else
-                        <a href="#" class="btn btn-info btn-sm text-white">Detail</a>
-                        @endif
-
-                        @endif
-
                     </td>
-
-
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center text-muted py-3">
-                        Tidak ada data maintenance.
-                    </td>
+                    <td colspan="6" class="text-center text-muted py-3">Tidak ada data maintenance.</td>
                 </tr>
                 @endforelse
             </tbody>
-
         </table>
     </div>
 </div>
+
+{{-- MODAL DETAIL PER-MAINTENANCE --}}
+@foreach ($maintenances as $m)
+<div class="modal fade" id="detailModal-{{ $m->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg rounded-4">
+
+            {{-- HEADER SOLID --}}
+            <div class="modal-header bg-primary text-white p-3 border-bottom-0">
+                <h5 class="modal-title">
+                    <i class="bi bi-info-circle me-2"></i>Detail Maintenance
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            {{-- BODY --}}
+            <div class="modal-body p-4">
+                <table class="table table-borderless mb-0">
+                    <tr>
+                        <th style="width: 35%">Nomor Kontrak</th>
+                        <td>{{ $m->contract->nomor_kontrak }}</td>
+                    </tr>
+                    <tr>
+                        <th>Teknisi</th>
+                        <td>{{ $m->teknisi->name ?? 'Belum ditentukan' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal Kunjungan</th>
+                        <td>{{ $m->tanggal_kunjungan ? date('d-m-Y', strtotime($m->tanggal_kunjungan)) : '-' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Jam Kunjungan</th>
+                        <td>{{ $m->jam_kunjungan ? date('H:i', strtotime($m->jam_kunjungan)) : '-' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>
+                            <span class="badge 
+                                @if ($m->status == 'dijadwalkan') bg-info
+                                @elseif ($m->status == 'selesai') bg-success
+                                @elseif ($m->status == 'dibatalkan') bg-danger
+                                @else bg-secondary
+                                @endif
+                                py-2 px-3 fs-6">
+                                {{ ucfirst($m->status) }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Catatan</th>
+                        <td>{{ $m->catatan ?? '-' }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            {{-- FOOTER --}}
+            <div class="modal-footer border-0 justify-content-end">
+                <button class="btn btn-secondary btn-lg rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+@endforeach
 
 @endsection
