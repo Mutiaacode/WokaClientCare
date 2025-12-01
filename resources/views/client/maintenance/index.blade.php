@@ -5,7 +5,7 @@
 @section('content')
 
 @if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
+<div class="alert alert-success">{{ session('success') }}</div>
 @endif
 
 <div class="card shadow border-0 rounded-3">
@@ -57,44 +57,44 @@
 
                     {{-- Aksi --}}
                     {{-- Aksi --}}
-<td class="text-center">
+                    <td class="text-center">
 
-    @if ($m->client_has_acted)
-        {{-- Sudah memilih -> hanya tampilkan detail --}}
-        <a href="#" class="btn btn-info btn-sm text-white">Detail</a>
+                        @if ($m->client_has_acted)
+                        {{-- Sudah memilih -> hanya tampilkan detail --}}
+                        <a href="#" class="btn btn-info btn-sm text-white">Detail</a>
 
-    @else
+                        @else
 
-        @if ($m->status == 'selesai')
-            <div class="d-flex justify-content-center gap-2">
+                        @if ($m->status == 'dijadwalkan')
+                        <div class="d-flex justify-content-center gap-2">
 
-                {{-- Terima --}}
-                <form action="{{ route('client.maintenance.accept', $m->id) }}" method="POST">
-                    @csrf
-                    <button class="btn btn-success btn-sm">
-                        Terima
-                    </button>
-                </form>
+                            {{-- Terima --}}
+                            <form action="{{ route('client.maintenance.accept', $m->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-success btn-sm">
+                                    Terima
+                                </button>
+                            </form>
 
-                {{-- Tolak --}}
-                <form action="{{ route('client.maintenance.reject', $m->id) }}" method="POST">
-                    @csrf
-                    <button class="btn btn-danger btn-sm">
-                        Tolak
-                    </button>
-                </form>
+                            {{-- Tolak --}}
+                            <form action="{{ route('client.maintenance.reject', $m->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-danger btn-sm">
+                                    Tolak
+                                </button>
+                            </form>
 
-                {{-- Detail --}}
-                <a href="#" class="btn btn-info btn-sm text-white">Detail</a>
+                            {{-- Detail --}}
+                            <a href="#" class="btn btn-info btn-sm text-white">Detail</a>
 
-            </div>
-        @else
-            <a href="#" class="btn btn-info btn-sm text-white">Detail</a>
-        @endif
+                        </div>
+                        @else
+                        <a href="#" class="btn btn-info btn-sm text-white">Detail</a>
+                        @endif
 
-    @endif
+                        @endif
 
-</td>
+                    </td>
 
 
                 </tr>
