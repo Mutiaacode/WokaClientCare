@@ -73,7 +73,7 @@
                     {{ ucfirst(str_replace('_',' ',$t->status)) }}
                 </span>
             </div>
-            <a href="{{ route('client.ticket.show', $t->id) }}" class="btn btn-sm btn-outline-light border-0 shadow-sm">
+            <a href="{{ route('client.ticket.show', $t->id) }}" class="badge bg-dark rounded-pill text-decoration-none">
                 Lihat
             </a>
         </li>
