@@ -5,8 +5,30 @@
 
         <h4 class="mb-4">Buat Invoice</h4>
 
-        <form action="{{ route('admin.maintenance.update') }}" method="POST">
+        <form action="{{ route('admin.maintenance.store', $maintenance->id) }}" method="PUT">
             @csrf
+            <div class="mb-3">
+                <label>Kontrak</label>
+                <select name="contract_id" class="form-control" required>
+                    <option value="">-- Pilih Kontrak --</option>
+                    @foreach ($contracts as $c)
+                        <option value="{{ $c->id }}">
+                            {{ $c->nomor_kontrak }} - {{ $c->client->user->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>teknisi</label>
+                <select name="teknisi_id" class="form-control" required>
+                    <option value="">-- Pilih Teknisi --</option>
+                    @foreach ($teknisi as $t)
+                        <option value="{{ $t->id }}">
+                            {{ $t->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             <div class="mb-3">
                 <label class="fw-semibold">Tanggal Kunjungan</label>
                 <input type="date" name="tanggal_kunjungan" class="form-control" required>

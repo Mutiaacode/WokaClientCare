@@ -18,6 +18,7 @@
                         <td>Contdact</td>
                         <td>Nama Teknisi</td>
                         <td>Status</td>
+                        <td>Catatan</td>
                         <td>Aksi</td>
                     </tr>
                 </thead>
@@ -27,6 +28,7 @@
                             <td class="text-center">{{ $m->contract->nomor_kontrak }}</td>
                             <td class="text-center">{{ $m->teknisi->name }}</td>
                             <td class="text-center">{{ $m->status }}</td>
+                            <td class="text-center">{{ $m->catatan }}</td>
 
                             <td class="text-center">
                                 <div class="d-flex justify-content-center gap-2">
