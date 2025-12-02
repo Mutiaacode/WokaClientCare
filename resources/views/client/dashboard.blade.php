@@ -73,7 +73,7 @@
                     {{ ucfirst(str_replace('_',' ',$t->status)) }}
                 </span>
             </div>
-            <a href="{{ route('client.ticket.show', $t->id) }}" class="badge bg-dark rounded-pill text-decoration-none">
+            <a href="{{ route('client.ticket.show', $t->id) }}" class="badge bg-warning rounded-pill text-decoration-none">
                 Lihat
             </a>
         </li>
@@ -85,7 +85,7 @@
 
 {{-- MAINTENANCE TERDEKAT --}}
 <div class="card shadow-sm rounded-4 border-0 mb-4">
-    <div class="card-header bg-warning text-dark fw-semibold fs-6">
+    <div class="card-header bg-warning text-white fw-semibold fs-6">
         Maintenance Terdekat
     </div>
     <ul class="list-group list-group-flush">

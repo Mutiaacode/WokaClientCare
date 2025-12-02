@@ -15,7 +15,7 @@
             <table class="table table-hover table-bordered align-middle mb-0">
                 <thead class="table-primary text-center">
                     <tr>
-                        <td>Contdact</td>
+                        <td>Kontrak</td>
                         <td>Nama Teknisi</td>
                         <td>Status</td>
                         <td>Catatan</td>
