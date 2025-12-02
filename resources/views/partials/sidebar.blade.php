@@ -18,7 +18,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('admin.users.index') }}">
+                        <a class="sidebar-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
                             <i class="ti ti-users"></i>
                             <span class="hide-menu">Users</span>
                         </a>
