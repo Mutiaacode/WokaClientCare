@@ -224,12 +224,34 @@
                     </div>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">
-                                    <i class="ti ti-home me-1"></i>Home</a>
+                            <li class="breadcrumb-item">
+                                <a
+                                    href="
+                @switch(auth()->user()->role)
+                    @case('admin')
+                        {{ route('admin.dashboard') }}
+                        @break
+                    @case('client')
+                        {{ route('client.dashboard') }}
+                        @break
+                    @case('staff')
+                        {{ route('staff.dashboard') }}
+                        @break
+                    @case('teknisi')
+                        {{ route('teknisi.dashboard') }}
+                        @break
+                    @default
+                        {{ route('dashboard') }}
+                @endswitch
+            ">
+                                    <i class="ti ti-home me-1"></i>Home
+                                </a>
                             </li>
+
                             <li class="breadcrumb-item active">@yield('breadcrumb', 'Dashboard')</li>
                         </ol>
                     </nav>
+
                 </div>
 
                 {{-- Main Content --}}
