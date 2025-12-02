@@ -98,7 +98,7 @@ Route::middleware(['auth', 'role:client'])
             ->name('maintenance.index');
 
         Route::post('/maintenance/{id}/accept', [ClientMaintenanceController::class, 'accept'])
-        ->name('maintenance.accept');
+            ->name('maintenance.accept');
 
 
         Route::post('/maintenance/{id}/reject', [ClientMaintenanceController::class, 'reject'])
@@ -106,17 +106,15 @@ Route::middleware(['auth', 'role:client'])
 
         Route::middleware(['auth', 'role:client'])->group(function () {
 
-   Route::get('/profile', [ClientProfileController::class, 'index'])->name('profile.index');
+            Route::get('/profile', [ClientProfileController::class, 'index'])->name('profile.index');
 
-Route::get('/profile/edit', [ClientProfileController::class, 'edit'])->name('profile.edit');
+            Route::get('/profile/edit', [ClientProfileController::class, 'edit'])->name('profile.edit');
 
-Route::post('/profile/update', [ClientProfileController::class, 'update'])->name('profile.update');
+            Route::post('/profile/update', [ClientProfileController::class, 'update'])->name('profile.update');
 
-Route::post('/profile/update-password', [ClientProfileController::class, 'updatePassword'])
-    ->name('profile.password');
-
-});
-    
+            Route::post('/profile/update-password', [ClientProfileController::class, 'updatePassword'])
+                ->name('profile.password');
+        });
     });
 
 Route::middleware(['auth', 'role:teknisi'])
@@ -141,3 +139,12 @@ Route::middleware(['auth', 'role:staff'])
         Route::resource('tickets', StaffTicketController::class);
         Route::resource('invoices', StaffInvoiceController::class);
     });
+
+
+Route::post('/notif/hide', function () {
+    $hidden = session()->get('hidden_notif', []);
+    $hidden[] = request('id');
+    session()->put('hidden_notif', $hidden);
+
+    return back();
+})->name('notif.hide');
