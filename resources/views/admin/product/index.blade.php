@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard Produk - Admin') 
+
 @section('content')
 
  @if (session('sukses'))

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', 'Edit Client')
-@section('breadcrumb', 'Edit Client')
+@section('title', 'Edit Client - Admin') 
 
 @section('content')
     <div class="card shadow border-0 p-4 rounded-2">

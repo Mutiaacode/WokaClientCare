@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', 'Tambah Client')
-@section('breadcrumb', 'Tambah Client')
+@section('title', 'Tambah Client - Admin') 
 
 @section('content')
     <div class="card shadow border-0 rounded-2 p-4">

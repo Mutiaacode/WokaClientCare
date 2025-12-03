@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Tambah Invoices - Admin') 
+
 @section('content')
     <div class="card p-4 shadow">
 

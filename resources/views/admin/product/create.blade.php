@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Tambah Produk - Admin') 
+
 @section('content')
     <div class="card shadow border-0 p-4">
 

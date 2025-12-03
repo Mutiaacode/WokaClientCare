@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard Admin') 
+
 @section('content')
     {{-- HEADER --}}
     <div class="mb-4">
@@ -119,7 +121,7 @@
                 </div>
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush">
-                        @foreach ($recentActivities as $act)
+                        @forelse ($recentActivities as $act)
                             <li class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1">Kontrak {{ $act->nomor_kontrak }}</h6>
@@ -127,7 +129,10 @@
                                 </div>
                                 <p class="mb-1">Dibuat oleh {{ $act->client->user->name }}</p>
                             </li>
-                        @endforeach
+                        @empty
+                            <li class="list-group-item text-muted">Belum ada aktivitas terbaru.</li>
+                        @endforelse
+
                     </ul>
                 </div>
             </div>
@@ -142,9 +147,12 @@
                     <div class="mb-3">
                         <h6 class="text-dark fw-semibold">Staff</h6>
                         <ol class="mb-0 ps-3">
-                            @foreach ($staff as $s)
+                            @forelse ($staff as $s)
                                 <li>{{ $s->name }}</li>
-                            @endforeach
+                            @empty
+                                <li class="text-muted">Belum ada staff terdaftar.</li>
+                            @endforelse
+
                         </ol>
                         <hr>
                     </div>
@@ -152,9 +160,11 @@
                     <div>
                         <h6 class="text-dark fw-semibold">Teknisi</h6>
                         <ol class="mb-0 ps-3">
-                            @foreach ($teknisi as $t)
+                            @forelse ($teknisi as $t)
                                 <li>{{ $t->name }}</li>
-                            @endforeach
+                            @empty
+                                <li class="text-muted">Belum ada teknisi terdaftar.</li>
+                            @endforelse
                         </ol>
                     </div>
                 </div>

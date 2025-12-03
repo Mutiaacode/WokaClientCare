@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboad Kontrak - Admin') 
+
 @section('content')
 
  @if (session('sukses'))

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Detail Invoices - Admin') 
+
 @section('content')
     <div class="container my-5">
         <div class="invoice-container position-relative">
