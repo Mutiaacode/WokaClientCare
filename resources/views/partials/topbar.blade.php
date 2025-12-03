@@ -166,6 +166,7 @@
                             <i class="ti ti-logout me-3"></i>
                             <span>Keluar</span>
                         </a>
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
                             style="display: none;">
                             @csrf

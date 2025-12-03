@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Maintenance - Admin') 
+@section('title', 'Edit Maintenance - Admin')
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="card p-4 shadow">
         <h4 class="mb-4 fw-bold">Edit Jadwal Maintenance</h4>
 
