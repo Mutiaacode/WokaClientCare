@@ -1,17 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Kontrak - Admin')
-
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <div class="card p-4 shadow">
 
         <h4 class="mb-4">Tambah Kontrak</h4>
@@ -27,6 +16,18 @@
                         @foreach ($clients as $c)
                             <option value="{{ $c->id }}">
                                 {{ $c->user->name }} - {{ $c->nama_usaha }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Staff Penanggung Jawab</label>
+                    <select name="staff_id" class="form-control" required>
+                        <option value="">-- Pilih Staff --</option>
+                        @foreach ($staffList as $s)
+                            <option value="{{ $s->id }}">
+                                {{ $s->name }}
                             </option>
                         @endforeach
                     </select>
@@ -114,5 +115,4 @@
             periodeGroup.style.display = this.value === 'satu_kali' ? 'none' : 'block';
         });
     </script>
-
 @endsection
