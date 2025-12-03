@@ -114,9 +114,7 @@ Route::middleware(['auth', 'role:client'])
 
             Route::post('/profile/update-password', [ClientProfileController::class, 'updatePassword'])
                 ->name('profile.password');
-
         });
-
     });
 
 Route::middleware(['auth', 'role:teknisi'])
@@ -150,3 +148,12 @@ Route::middleware(['auth', 'role:staff'])
 
         Route::resource('invoices', StaffInvoiceController::class);
     });
+
+
+Route::post('/notif/hide', function () {
+    $hidden = session()->get('hidden_notif', []);
+    $hidden[] = request('id');
+    session()->put('hidden_notif', $hidden);
+
+    return back();
+})->name('notif.hide');

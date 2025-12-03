@@ -10,10 +10,10 @@ class User extends Authenticatable
     use HasFactory;
 
     protected $fillable = [
-        'name', 
-        'email', 
-        'password', 
-        'role', 
+        'name',
+        'email',
+        'password',
+        'role',
         'phone'
     ];
 
@@ -25,6 +25,11 @@ class User extends Authenticatable
     public function ticketsReviewed()
     {
         return $this->hasMany(Ticket::class, 'staff_id');
+    }
+
+    public function contractsHandled()
+    {
+        return $this->hasMany(Contract::class, 'staff_id');
     }
 
     public function ticketsAssigned()

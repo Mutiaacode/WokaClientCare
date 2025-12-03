@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard Client - Admin') 
+
 @section('content')
     @if (session('sukses'))
         <div class="alert alert-success mt-3 px-4">{{ session('sukses') }}</div>

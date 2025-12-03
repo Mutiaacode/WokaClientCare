@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard Pembayaran - Admin') 
+
 @section('content')
     <div class="card shadow border-0 rounded-3">
         <div class="card-header bg-primary text-white py-4">

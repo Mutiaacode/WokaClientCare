@@ -11,6 +11,7 @@ class Contract extends Model
 
     protected $fillable = [
         'client_id',
+        'staff_id',
         'produk_id',
         'nomor_kontrak',
         'tipe_kontrak',
@@ -33,6 +34,12 @@ class Contract extends Model
     {
         return $this->belongsTo(Product::class, 'produk_id');
     }
+
+    public function staff()
+    {
+        return $this->belongsTo(User::class, 'staff_id');
+    }
+
 
     public function tickets()
     {
