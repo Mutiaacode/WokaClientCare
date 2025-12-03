@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah User - Admin') 
+@section('title', 'Tambah User - Admin')
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="card shadow-sm border-0 p-4 rounded">
 
         <h4 class="mb-4 fw-bold">Tambah User</h4>
