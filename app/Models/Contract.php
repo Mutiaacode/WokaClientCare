@@ -11,22 +11,22 @@ class Contract extends Model
 
     protected $fillable = [
         'client_id',
-        'produk_id', 
-        'nomor_kontrak', 
+        'produk_id',
+        'nomor_kontrak',
         'tipe_kontrak',
-        'periode_tagihan', 
-        'nama_layanan', 
+        'periode_tagihan',
+        'nama_layanan',
         'tanggal_mulai',
-        'tanggal_berakhir', 
-        'harga_layanan', 
+        'tanggal_berakhir',
+        'harga_layanan',
         'status',
-        'file_kontrak', 
+        'file_kontrak',
         'catatan'
     ];
 
     public function client()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Client::class, 'client_id');
     }
 
     public function product()

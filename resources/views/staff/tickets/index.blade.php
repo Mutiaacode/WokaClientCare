@@ -9,7 +9,24 @@
     <div class="card shadow border-0 rounded-3">
         <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-3 rounded-top">
             <h4 class="mb-0 text-white">Data Ticket</h4>
+
+            <form action="{{ route('staff.tickets.search') }}" method="GET" class="d-flex">
+                <input type="text" name="search" class="form-control me-2 btn btn-light" placeholder="Cari ticket..."
+                    value="{{ request('search') }}">
+                <button class="btn btn-light">Search</button>
+            </form>
         </div>
+
+        @if (request('search'))
+            <div class="px-3 pt-3">
+                <p class="mb-2">
+                    Hasil pencarian untuk: <strong>"{{ request('search') }}"</strong>
+                </p>
+                @if($tickets->count() === 0)
+                    <p class="text-danger">Tidak ada data ditemukan.</p>
+                @endif
+            </div>
+        @endif
 
         <div class="table-responsive p-3">
             <table class="table table-hover table-bordered align-middle mb-0">
@@ -23,13 +40,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tickets as $ticket)
+                    @forelse ($tickets as $ticket)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td class="text-center">{{ $ticket->client->user->name }}</td>
                             <td class="text-center">{{ $ticket->contract->nomor_kontrak }}</td>
                             <td class="text-center">
-                                @if (   $ticket->status == 'open')
+                                @if ($ticket->status == 'open')
                                     <span class="badge bg-secondary">Open</span>
                                 @elseif ($ticket->status == 'in_progress')
                                     <span class="badge bg-info">In Progress</span>
@@ -37,7 +54,6 @@
                                     <span class="badge bg-success">Resolved</span>
                                 @else
                                     <span class="badge bg-dark">Closed</span>
-                                
                                 @endif
                             </td>
                             <td class="text-center">
@@ -45,9 +61,14 @@
                                     class="btn btn-sm btn-info text-white">Detail</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">Tidak ada data ditemukan.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
+
     </div>
 @endsection

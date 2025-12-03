@@ -18,7 +18,7 @@ class Client extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function contracts()
@@ -35,4 +35,5 @@ class Client extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+
 }

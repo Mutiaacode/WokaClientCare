@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class StaffTicketController extends Controller
 {
- 
+
     public function index()
     {
         $tickets = Ticket::where('staff_id', Auth::id())
@@ -20,7 +20,7 @@ class StaffTicketController extends Controller
         return view('staff.tickets.index', compact('tickets'));
     }
 
-  
+
     public function show($id)
     {
         $ticket = Ticket::where('staff_id', Auth::id())->findOrFail($id);
@@ -33,7 +33,7 @@ class StaffTicketController extends Controller
     {
         $request->validate([
             'teknisi_id' => 'nullable|exists:users,id',
-            'status'=> 'required|in:open,in_progress,resolved,closed',
+            'status' => 'required|in:open,in_progress,resolved,closed',
         ]);
 
         $ticket->update([
@@ -44,6 +44,23 @@ class StaffTicketController extends Controller
         return redirect()
             ->route('staff.tickets.index')
             ->with('sukses', 'Tiket berhasil diperbarui.');
-        
+
+    }
+
+    public function search(Request $request)
+    {
+        $query = Ticket::where('staff_id', auth()->id());
+
+        if ($request->search != '') {
+            $keyword = $request->search;
+
+            $query->whereHas('client.user', function ($q) use ($keyword) {
+                $q->where('name', 'like', "%$keyword%");
+            });
+        }
+
+        $tickets = $query->get();
+
+        return view('staff.tickets.index', compact('tickets'));
     }
 }

@@ -93,12 +93,12 @@ Route::middleware(['auth', 'role:client'])
 
         Route::get('/invoice/{id}/pay', [ClientInvoiceController::class, 'pay'])
             ->name('invoice.pay'); // <-- halaman upload
-
+    
         Route::get('/maintenance', [ClientMaintenanceController::class, 'index'])
             ->name('maintenance.index');
 
         Route::post('/maintenance/{id}/accept', [ClientMaintenanceController::class, 'accept'])
-        ->name('maintenance.accept');
+            ->name('maintenance.accept');
 
 
         Route::post('/maintenance/{id}/reject', [ClientMaintenanceController::class, 'reject'])
@@ -106,17 +106,17 @@ Route::middleware(['auth', 'role:client'])
 
         Route::middleware(['auth', 'role:client'])->group(function () {
 
-   Route::get('/profile', [ClientProfileController::class, 'index'])->name('profile.index');
+            Route::get('/profile', [ClientProfileController::class, 'index'])->name('profile.index');
 
-Route::get('/profile/edit', [ClientProfileController::class, 'edit'])->name('profile.edit');
+            Route::get('/profile/edit', [ClientProfileController::class, 'edit'])->name('profile.edit');
 
-Route::post('/profile/update', [ClientProfileController::class, 'update'])->name('profile.update');
+            Route::post('/profile/update', [ClientProfileController::class, 'update'])->name('profile.update');
 
-Route::post('/profile/update-password', [ClientProfileController::class, 'updatePassword'])
-    ->name('profile.password');
+            Route::post('/profile/update-password', [ClientProfileController::class, 'updatePassword'])
+                ->name('profile.password');
 
-});
-    
+        });
+
     });
 
 Route::middleware(['auth', 'role:teknisi'])
@@ -127,7 +127,12 @@ Route::middleware(['auth', 'role:teknisi'])
         Route::get('/dashboard', [TeknisiDashboardController::class, 'index'])
             ->name('dashboard');
         Route::resource('ticket', TeknisiTicketController::class);
+        Route::get('/teknisi/ticket/search', [TeknisiTicketController::class, 'search'])
+            ->name('ticket.search');
+
         Route::resource('maintenance', TeknisiMaintenanceController::class);
+        Route::get('/teknisi/maintenance/search', [TeknisiMaintenanceController::class, 'search'])
+            ->name('maintenance.search');
     });
 
 
@@ -139,5 +144,9 @@ Route::middleware(['auth', 'role:staff'])
             ->name('dashboard');
 
         Route::resource('tickets', StaffTicketController::class);
+        Route::get('/staff/tickets/search', [StaffTicketController::class, 'search'])
+            ->name('tickets.search');
+
+
         Route::resource('invoices', StaffInvoiceController::class);
     });
