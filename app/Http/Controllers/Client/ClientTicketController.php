@@ -14,11 +14,10 @@ class ClientTicketController extends Controller
     public function index()
     {
         $clientId = Auth::user()->client->id;
-
         $tickets = Ticket::where('client_id', $clientId)
             ->orderBy('created_at', 'DESC')
             ->get();
-
+            
         return view('client.ticket.index', compact('tickets'));
     }
 

@@ -80,6 +80,7 @@ Route::middleware(['auth', 'role:client'])
         Route::post('/contract/{id}/approve', [ClientContractController::class, 'approve'])
             ->name('contract.approve');
 
+
         Route::resource('ticket', ClientTicketController::class);
 
         Route::get('/invoice', [ClientInvoiceController::class, 'index'])

@@ -9,35 +9,46 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientContractController extends Controller
 {
-    public function index()
-    {
-        $client = Auth::user()->client;
+    public function index(Request $request)
+{
+    $client = Auth::user()->client;
+    $search = $request->search;
 
-        // jika tidak ada relasi client->contracts(), pake cara universal ini
-        $contracts = Contract::where('client_id', $client->id)->get();
+    $query = Contract::where('client_id', $client->id);
 
-        return view('client.contract.index', compact('contracts'));
+    if ($search) {
+        $query->where(function ($q) use ($search) {
+            $q->where('nomor_kontrak', 'like', "%$search%")
+              ->orWhere('tipe_kontrak', 'like', "%$search%")
+              ->orWhereHas('product', function ($q2) use ($search) {
+                  $q2->where('nama_produk', 'like', "%$search%");
+              });
+        });
     }
 
-     public function show($id)
+    $contracts = $query->get();
+
+    return view('client.contract.index', compact('contracts', 'search'));
+}
+
+    public function show($id)
     {
         $contract = Contract::with(['client', 'product'])->findOrFail($id);
         return view('client.contract.show', compact('contract'));
     }
 
     public function approve($id)
-{
-    $contract = Contract::where('id', $id)
-        ->where('client_id', Auth::user()->client->id)
-        ->firstOrFail();
+    {
+        $contract = Contract::where('id', $id)
+            ->where('client_id', Auth::user()->client->id)
+            ->firstOrFail();
 
-    // update status
-    $contract->status = 'aktif';
-    $contract->save();
+        // update status
+        $contract->status = 'aktif';
+        $contract->save();
 
-    return redirect()->route('client.contract.index')
-        ->with('success', 'Kontrak berhasil di ACC.');
-}
-
+        return redirect()->route('client.contract.index')
+            ->with('success', 'Kontrak berhasil di ACC.');
+    }
 
 }
