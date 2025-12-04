@@ -10,11 +10,24 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminPaymentController extends Controller
 {
-    public function index()
-    {
-        $payments = Payment::with(['invoice.contract.client.user'])->latest()->get();
-        return view('admin.payments.index', compact('payments'));
-    }
+    public function index(Request $request)
+{
+    $status = $request->status;
+
+    $payments = Payment::with(['invoice.contract.client.user'])
+        ->when($status, function ($query) use ($status) {
+            $query->whereHas('invoice', function ($q) use ($status) {
+                $q->where('status', $status); 
+            });
+        })
+        ->latest()
+        ->get();
+
+    $notFound = ($status && $payments->count() == 0);
+
+    return view('admin.payments.index', compact('payments', 'status', 'notFound'));
+}
+
 
     public function show($id)
     {

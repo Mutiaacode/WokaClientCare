@@ -9,11 +9,22 @@ use Illuminate\Http\Request;
 
 class AdminTicketController extends Controller
 {
-    public function index()
-    {
-        $tickets = Ticket::with(['client.user'])->latest()->get();
-        return view('admin.tickets.index', compact('tickets'));
-    }
+    public function index(Request $request)
+{
+    $status = $request->status;
+
+    $tickets = Ticket::with(['client.user'])
+        ->when($status, function ($query) use ($status) {
+            $query->where('status', $status);
+        })
+        ->latest()
+        ->get();
+
+    $notFound = ($status && $tickets->count() == 0);
+
+    return view('admin.tickets.index', compact('tickets', 'status', 'notFound'));
+}
+
 
     public function show(Ticket $ticket)
     {

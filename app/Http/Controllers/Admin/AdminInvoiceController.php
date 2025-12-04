@@ -9,11 +9,26 @@ use Illuminate\Http\Request;
 
 class AdminInvoiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $invoices = Invoice::with(['contract.client.user'])->latest()->get();
-        return view('admin.invoices.index', compact('invoices'));
+        $search = $request->search;
+
+        $invoices = Invoice::with(['contract.client.user'])
+            ->when($search, function ($query) use ($search) {
+
+                $query->where('nomor_invoice', 'LIKE', "%{$search}%")
+                    ->orWhereHas('contract.client.user', function ($q) use ($search) {
+                        $q->where('name', 'LIKE', "%{$search}%");
+                    });
+            })
+            ->latest()
+            ->get();
+
+        $notFound = ($search && $invoices->count() == 0);
+
+        return view('admin.invoices.index', compact('invoices', 'search', 'notFound'));
     }
+
 
     public function create()
     {

@@ -11,11 +11,24 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminClientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $clients = Client::with('user')->get();
-        return view('admin.clients.index', compact('clients'));
+        $search = $request->input('search');
+
+        $clients = Client::with('user')
+            ->when($search, function ($query) use ($search) {
+                $query->whereHas('user', function ($q) use ($search) {
+                    $q->where('name', 'LIKE', "%{$search}%")
+                        ->orWhere('email', 'LIKE', "%{$search}%");
+                });
+            })
+            ->get();
+
+        $notFound = ($search && $clients->count() == 0);
+
+        return view('admin.clients.index', compact('clients', 'search', 'notFound'));
     }
+
 
     public function create()
     {

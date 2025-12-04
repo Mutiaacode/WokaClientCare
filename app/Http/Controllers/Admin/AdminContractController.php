@@ -21,11 +21,25 @@ class AdminContractController extends Controller
         return 'WOKA-' . $tahun . '-' . str_pad($next, 4, '0', STR_PAD_LEFT);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $contracts = Contract::with(['client', 'product', 'staff'])->get();
-        return view('admin.contract.index', compact('contracts'));
+        $search = $request->search;
+
+        $contracts = Contract::with(['client', 'product', 'staff'])
+            ->when($search, function ($query) use ($search) {
+                $query->where('nomor_kontrak', 'LIKE', "%{$search}%")
+                    ->orWhereHas('client.user', function ($q) use ($search) {
+                        $q->where('name', 'LIKE', "%{$search}%");
+                    });
+            })
+            ->get();
+
+         $notFound = ($search && $contracts->count() == 0);
+
+        return view('admin.contract.index', compact('contracts', 'search', 'notFound'));
     }
+
+
 
     public function create()
     {

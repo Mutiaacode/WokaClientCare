@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="{{ asset('assets/libs/themify-icons/themify-icons.css') }}" />
 
     <!-- GOOGLE FONT: OUTFIT -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- GLOBAL STYLE OVERRIDES -->
     <style>

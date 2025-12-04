@@ -1,8 +1,29 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Pembayaran - Admin') 
+@section('title', 'Dashboard Pembayaran - Admin')
 
 @section('content')
+
+    <div class="mb-3 d-flex gap-2">
+
+        <form action="{{ route('admin.payments.index') }}" method="GET" class="d-flex gap-2">
+            <select name="status" class="form-select">
+                <option value="">-- Semua Status --</option>
+                <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Paid</option>
+                <option value="unpaid" {{ request('status') == 'unpaid' ? 'selected' : '' }}>Unpaid</option>
+            </select>
+
+            <button class="btn btn-woka">Filter</button>
+        </form>
+
+        @if (request('status'))
+            <a href="{{ route('admin.payments.index') }}" class="btn btn-warning">
+                Reset
+            </a>
+        @endif
+
+    </div>
+
     <div class="card shadow border-0 rounded-3">
         <div class="card-header bg-primary text-white py-4">
             <h4 class="mb-0 text-white">Data Pembayaran</h4>
@@ -40,4 +61,15 @@
             </table>
         </div>
     </div>
+    @if (isset($notFound) && $notFound)
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Pembayaran Tidak Ditemukan',
+                text: 'Tidak ada data dengan status tersebut.',
+                confirmButtonColor: '#3991A2'
+            });
+        </script>
+    @endif
+
 @endsection
