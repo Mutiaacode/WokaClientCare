@@ -5,22 +5,32 @@
 @section('content')
     <div class="card shadow border-0 rounded-3">
         <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-3 rounded-top">
-            <h4 class="mb-0 text-white">Kontrak Saya</h4>
+            <h4 class="mb-0 text-white">Contract Saya</h4>
 
-            <form action="{{ route('client.contract.index') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control me-2 bg-light"
-                    placeholder="Cari nomor kontrak / produk / tipe..." value="{{ request('search') }}">
-                <button class="btn btn-light">Search</button>
+            <form action="{{ route('client.contract.index') }}" method="GET" class="d-flex align-items-center"
+                style="gap: 15px;">
+
+                <div class="input-group" style="width: 280px;">
+
+                    <button class="input-group-text border-end-0">
+                        <i class="ti ti-search text-muted"></i>
+                    </button>
+
+                    <input type="text" name="search" class="form-control border-start-0"
+                        placeholder="Cari nomor kontrak / produk / tipe..." value="{{ request('search') }}"
+                        style="background-color: white; color: #333;">
+                </div>
             </form>
-
         </div>
 
         @if(request('search'))
-            <p>Hasil pencarian untuk: "{{ request('search') }}"</p>
+            <div class="gap-2 px-3 pt-3">
+                <p class="mb-1">Hasil pencarian untuk: "<strong>{{ request('search') }}</strong>"</p>
 
-            @if($contracts->count() === 0)
-                <p class="text-danger">Tidak ada data ditemukan.</p>
-            @endif
+                @if($contracts->count() === 0)
+                    <p class="text-danger mb-0">Tidak ada data ditemukan.</p>
+                @endif
+            </div>
         @endif
 
         <div class="table-responsive p-3">
@@ -49,11 +59,11 @@
                             <td>Rp {{ number_format($c->harga_layanan, 0, ',', '.') }}</td>
                             <td>
                                 <span class="badge 
-                                                                    @if($c->status == 'aktif') bg-success
-                                                                    @elseif($c->status == 'menunggu') bg-warning text-dark
-                                                                    @else bg-danger
-                                                                    @endif
-                                                                ">
+                                                                                            @if($c->status == 'aktif') bg-success
+                                                                                            @elseif($c->status == 'menunggu') bg-warning text-dark
+                                                                                            @else bg-danger
+                                                                                            @endif
+                                                                                        ">
                                     {{ ucfirst($c->status) }}
                                 </span>
                             </td>

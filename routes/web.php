@@ -85,23 +85,18 @@ Route::middleware(['auth', 'role:client'])
 
         Route::get('/invoice', [ClientInvoiceController::class, 'index'])
             ->name('invoice.index');
-
         Route::get('/invoice/{id}', [ClientInvoiceController::class, 'show'])
             ->name('invoice.show');
-
         Route::post('/invoice/{id}/upload', [ClientInvoiceController::class, 'uploadPayment'])
             ->name('invoice.upload');
-
         Route::get('/invoice/{id}/pay', [ClientInvoiceController::class, 'pay'])
             ->name('invoice.pay'); // <-- halaman upload
+
     
         Route::get('/maintenance', [ClientMaintenanceController::class, 'index'])
             ->name('maintenance.index');
-
         Route::post('/maintenance/{id}/accept', [ClientMaintenanceController::class, 'accept'])
             ->name('maintenance.accept');
-
-
         Route::post('/maintenance/{id}/reject', [ClientMaintenanceController::class, 'reject'])
             ->name('maintenance.reject');
 

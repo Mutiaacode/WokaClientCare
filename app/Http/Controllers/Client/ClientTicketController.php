@@ -11,15 +11,36 @@ use Illuminate\Support\Facades\Storage;
 
 class ClientTicketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $clientId = Auth::user()->client->id;
+        $search = $request->search;
         $tickets = Ticket::where('client_id', $clientId)
             ->orderBy('created_at', 'DESC')
             ->get();
-            
+        $query = Ticket::where('client_id', $clientId);
+
+        if ($request->search != '') {
+            $keyword = $request->search;
+
+            $query->where(function ($q) use ($keyword) {
+
+                // cari judul ticket
+                $q->where('judul', 'like', "%$keyword%");
+
+                // cari nomor kontrak melalui relasi contract
+                $q->orWhereHas('contract', function ($contractQuery) use ($keyword) {
+                    $contractQuery->where('nomor_kontrak', 'LIKE', "%{$keyword}%");
+                });
+
+            });
+
+        }
+        $tickets = $query->get();
         return view('client.ticket.index', compact('tickets'));
     }
+
+
 
     public function create()
     {
