@@ -57,7 +57,7 @@
 
                 <div class="col-md-6 mb-3" id="periode_tagihan_group">
                     <label>Periode Tagihan</label>
-                    <select name="periode_tagihan" class="form-control">
+                    <select name="periode_tagihan" id="periode_tagihan" class="form-control">
                         <option value="">-- Pilih Periode --</option>
                         <option value="bulanan">Bulanan</option>
                         <option value="tahunan">Tahunan</option>
@@ -68,12 +68,12 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label>Tanggal Mulai</label>
-                    <input type="date" name="tanggal_mulai" class="form-control" required>
+                    <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="form-control" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label>Tanggal Berakhir</label>
-                    <input type="date" name="tanggal_berakhir" class="form-control" required>
+                    <input type="date" name="tanggal_berakhir" id="tanggal_berakhir" class="form-control" required>
                 </div>
             </div>
 
@@ -110,9 +110,42 @@
     <script>
         const tipeKontrak = document.getElementById('tipe_kontrak');
         const periodeGroup = document.getElementById('periode_tagihan_group');
+        const periode = document.getElementById('periode_tagihan');
+        const mulai = document.getElementById('tanggal_mulai');
+        const berakhir = document.getElementById('tanggal_berakhir');
 
-        tipeKontrak.addEventListener('change', function() {
-            periodeGroup.style.display = this.value === 'satu_kali' ? 'none' : 'block';
-        });
+        function updateFields() {
+            if (tipeKontrak.value === 'satu_kali') {
+                periodeGroup.style.display = 'none';
+                berakhir.removeAttribute('disabled');
+                berakhir.value = '';
+            } else {
+                periodeGroup.style.display = 'block';
+                berakhir.setAttribute('disabled', true);
+                generateEndDate();
+            }
+        }
+
+        function generateEndDate() {
+            if (!mulai.value) return;
+            if (!periode.value) return;
+
+            let start = new Date(mulai.value);
+            if (periode.value === 'bulanan') {
+                start.setMonth(start.getMonth() + 1);
+            }
+            if (periode.value === 'tahunan') {
+                start.setFullYear(start.getFullYear() + 1);
+            }
+
+            let d = start.toISOString().split('T')[0];
+            berakhir.value = d;
+        }
+
+        tipeKontrak.addEventListener('change', updateFields);
+        periode.addEventListener('change', generateEndDate);
+        mulai.addEventListener('change', generateEndDate);
+
+        updateFields();
     </script>
 @endsection

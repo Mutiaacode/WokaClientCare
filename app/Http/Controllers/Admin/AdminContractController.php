@@ -34,12 +34,10 @@ class AdminContractController extends Controller
             })
             ->get();
 
-         $notFound = ($search && $contracts->count() == 0);
+        $notFound = ($search && $contracts->count() == 0);
 
         return view('admin.contract.index', compact('contracts', 'search', 'notFound'));
     }
-
-
 
     public function create()
     {
@@ -59,22 +57,32 @@ class AdminContractController extends Controller
             'tipe_kontrak'    => 'required|in:langganan,satu_kali',
             'periode_tagihan' => 'nullable|in:bulanan,tahunan',
             'tanggal_mulai'   => 'required|date',
-            'tanggal_berakhir' => 'required|date|after:tanggal_mulai',
+            'tanggal_berakhir' => 'nullable|date',
             'harga_layanan'   => 'required|numeric',
             'file_kontrak'    => 'nullable|mimes:pdf,doc,docx|max:4096',
             'catatan'         => 'nullable|string',
         ]);
 
         $data = $request->all();
-
-
         $data['nomor_kontrak'] = $this->generateNomorKontrak();
+
+        $product = Product::find($request->produk_id);
+        $data['nama_layanan'] = $product->nama_produk;
 
         if ($request->tipe_kontrak === 'satu_kali') {
             $data['periode_tagihan'] = null;
+            $data['tanggal_berakhir'] = $request->tanggal_berakhir;
         }
-        $product = Product::find($request->produk_id);
-        $data['nama_layanan'] = $product->nama_produk;
+
+        if ($request->tipe_kontrak === 'langganan') {
+            if ($request->periode_tagihan === 'bulanan') {
+                $data['tanggal_berakhir'] = date('Y-m-d', strtotime($request->tanggal_mulai . ' +1 month'));
+            }
+            if ($request->periode_tagihan === 'tahunan') {
+                $data['tanggal_berakhir'] = date('Y-m-d', strtotime($request->tanggal_mulai . ' +1 year'));
+            }
+        }
+
         if ($request->hasFile('file_kontrak')) {
             $data['file_kontrak'] = $request->file('file_kontrak')->store('kontrak', 'public');
         }
@@ -104,7 +112,7 @@ class AdminContractController extends Controller
             'tipe_kontrak'    => 'required|in:langganan,satu_kali',
             'periode_tagihan' => 'nullable|in:bulanan,tahunan',
             'tanggal_mulai'   => 'required|date',
-            'tanggal_berakhir' => 'required|date|after:tanggal_mulai',
+            'tanggal_berakhir' => 'nullable|date',
             'harga_layanan'   => 'required|numeric',
             'file_kontrak'    => 'nullable|mimes:pdf,doc,docx|max:4096',
             'catatan'         => 'nullable|string',
@@ -112,12 +120,22 @@ class AdminContractController extends Controller
 
         $data = $request->all();
 
-        if ($request->tipe_kontrak === 'satu_kali') {
-            $data['periode_tagihan'] = null;
-        }
-
         $product = Product::find($request->produk_id);
         $data['nama_layanan'] = $product->nama_produk;
+
+        if ($request->tipe_kontrak === 'satu_kali') {
+            $data['periode_tagihan'] = null;
+            $data['tanggal_berakhir'] = $request->tanggal_berakhir;
+        }
+
+        if ($request->tipe_kontrak === 'langganan') {
+            if ($request->periode_tagihan === 'bulanan') {
+                $data['tanggal_berakhir'] = date('Y-m-d', strtotime($request->tanggal_mulai . ' +1 month'));
+            }
+            if ($request->periode_tagihan === 'tahunan') {
+                $data['tanggal_berakhir'] = date('Y-m-d', strtotime($request->tanggal_mulai . ' +1 year'));
+            }
+        }
 
         if ($request->hasFile('file_kontrak')) {
             if ($contract->file_kontrak && Storage::disk('public')->exists($contract->file_kontrak)) {
