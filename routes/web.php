@@ -94,7 +94,7 @@ Route::middleware(['auth', 'role:client'])
 
         Route::get('/invoice/{id}/pay', [ClientInvoiceController::class, 'pay'])
             ->name('invoice.pay'); // <-- halaman upload
-    
+
         Route::get('/maintenance', [ClientMaintenanceController::class, 'index'])
             ->name('maintenance.index');
 
