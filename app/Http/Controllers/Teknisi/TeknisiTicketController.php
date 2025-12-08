@@ -7,12 +7,13 @@ use App\Models\Contract;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeknisiTicketController extends Controller
 {
     public function index()
     {
-        $tickets = Ticket::where('teknisi_id', auth()->id())->get();
+        $tickets = Ticket::where('teknisi_id', Auth::id())->get();
         return view('teknisi.ticket.index', compact('tickets'));
     }
 
@@ -35,4 +36,4 @@ class TeknisiTicketController extends Controller
         return redirect()->route('teknisi.tickets.index')
             ->with('success', 'Status tiket diperbarui!');
     }
-}
+}   
