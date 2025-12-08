@@ -9,16 +9,28 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::whereIn('role', ['admin', 'staff', 'teknisi'])->get();
-        return view('admin.user.index', compact('users'));
+        $search = $request->input('search');
+
+        $users = User::whereIn('role', ['admin', 'staff', 'teknisi'])
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%")
+                    ->orWhere('role', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+        $notFound = ($search && $users->count() == 0);
+
+        return view('admin.user.index', compact('users', 'search', 'notFound'));
     }
+
 
     public function create()
     {
         return view('admin.user.create', [
-            'roles' => ['admin', 'staff', 'teknisi'],
+            'roles' => ['staff', 'teknisi'],
         ]);
     }
 

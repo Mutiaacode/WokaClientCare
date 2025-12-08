@@ -36,4 +36,21 @@ class TeknisiTicketController extends Controller
         return redirect()->route('teknisi.tickets.index')
             ->with('success', 'Status tiket diperbarui!');
     }
-}   
+
+     public function search(Request $request)
+    {
+        $query = Ticket::where('teknisi_id', auth()->id());
+
+        if ($request->search != '') {
+            $keyword = $request->search;
+
+            $query->whereHas('client.user', function ($q) use ($keyword) {
+                $q->where('name', 'like', "%$keyword%");
+            });
+        }
+
+        $tickets = $query->get();
+
+        return view('teknisi.ticket.index', compact('tickets'));
+    }
+}

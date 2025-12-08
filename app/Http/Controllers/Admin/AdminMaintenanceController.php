@@ -10,14 +10,24 @@ use Illuminate\Http\Request;
 
 class AdminMaintenanceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->search;
+
         $maintenances = MaintenanceSchedule::with(['contract.client.user', 'teknisi'])
+            ->when($search, function ($query) use ($search) {
+                $query->whereHas('contract', function ($q) use ($search) {
+                    $q->where('nomor_kontrak', 'LIKE', "%{$search}%");
+                });
+            })
             ->latest()
             ->get();
 
-        return view('admin.maintenance.index', compact('maintenances'));
+        $notFound = ($search && $maintenances->count() == 0);
+
+        return view('admin.maintenance.index', compact('maintenances', 'search', 'notFound'));
     }
+
 
     public function create()
     {

@@ -1,16 +1,42 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard Tiket - Admin') 
+
 @section('content')
 
 @if (session('sukses'))
     <div class="alert alert-success mt-3 px-4">{{ session('sukses') }}</div>
 @endif
 
+ <div class="mb-3 d-flex align-items-center gap-2">
+
+    <form action="{{ route('admin.tickets.index') }}" method="GET" class="d-flex gap-2">
+        <select name="status" class="form-select">
+            <option value="">-- Semua Status --</option>
+            <option value="open" {{ request('status')=='open' ? 'selected' : '' }}>Open</option>
+            <option value="in_progress" {{ request('status')=='in_progress' ? 'selected' : '' }}>In Progress</option>
+            <option value="waiting_tech" {{ request('status')=='waiting_tech' ? 'selected' : '' }}>Waiting Tech</option>
+            <option value="resolved" {{ request('status')=='resolved' ? 'selected' : '' }}>Resolved</option>
+            <option value="closed" {{ request('status')=='closed' ? 'selected' : '' }}>Closed</option>
+        </select>
+
+        <button class="btn btn-woka">Filter</button>
+    </form>
+
+    @if(request('status'))
+        <a href="{{ route('admin.tickets.index') }}" class="btn btn-warning">
+            Reset
+        </a>
+    @endif
+
+</div>
+
+    
+
 <div class="card shadow border-0 rounded-3">
     <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-4 rounded-top">
         <h4 class="mb-0 text-white">Data Tiket</h4>
     </div>
-    
 
     <div class="table-responsive p-3">
         <table class="table table-hover table-bordered align-middle mb-0">
@@ -59,5 +85,15 @@
         </table>
     </div>
 </div>
+@if (isset($notFound) && $notFound)
+<script>
+    Swal.fire({
+        icon: 'warning',
+        title: 'Tidak Ada Tiket',
+        text: 'Tidak ditemukan tiket dengan status tersebut.',
+        confirmButtonColor: '#3991A2'
+    });
+</script>
+@endif
 
 @endsection

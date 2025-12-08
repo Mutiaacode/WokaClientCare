@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Contract;
 use Illuminate\Http\Request;
@@ -13,7 +14,13 @@ class StaffInvoiceController extends Controller
     // LIST semua invoice yang dibuat staff
     public function index()
     {
-        $invoices = Invoice::all();
+        // Ambil semua contract_id dari ticket milik staff yang login
+        $contractIds = Ticket::where('staff_id', auth()->id())
+            ->pluck('contract_id');
+
+        // Ambil semua invoice berdasarkan contract_id tersebut
+        $invoices = Invoice::whereIn('contract_id', $contractIds)->get();
+
         return view('staff.invoices.index', compact('invoices'));
     }
 
@@ -95,5 +102,21 @@ class StaffInvoiceController extends Controller
 
         return redirect()->route('staff.invoices.index')
             ->with('success', 'Invoice berhasil dihapus!');
+    }
+
+    public function search(Request $request)
+    {
+        $query = Invoice::with(['contract.client.user'])
+            ->where('teknisi_id', auth()->id()); // <--- FILTER WAJIB
+
+        if ($request->nama) {
+            $query->whereHas('contract.client.user', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->nama . '%');
+            });
+        }
+
+        $maintenance = $query->get();
+
+        return view('teknisi.maintenance.index', compact('maintenance'));
     }
 }

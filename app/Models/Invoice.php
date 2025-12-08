@@ -10,17 +10,17 @@ class Invoice extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id', 
-        'contract_id', 
+        'client_id',
+        'contract_id',
         'nomor_invoice',
-        'tanggal_terbit', 
-        'tanggal_jatuh_tempo', 
+        'tanggal_terbit',
+        'tanggal_jatuh_tempo',
         'subtotal',
-        'pajak', 
-        'periode', 
-        'diskon', 
-        'total', 
-        'status', 
+        'pajak',
+        'periode',
+        'diskon',
+        'total',
+        'status',
         'catatan'
     ];
 

@@ -8,11 +8,20 @@ use App\Models\Product;
 
 class AdminProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-        return view('admin.product.index', compact('products'));
+        $search = $request->input('search');
+
+        $products = Product::when($search, function ($query) use ($search) {
+            $query->where('nama_produk', 'LIKE', "%{$search}%")
+                ->orWhere('deskripsi', 'LIKE', "%{$search}%");
+        })->get();
+
+        $notFound = ($search && $products->count() == 0);
+
+        return view('admin.product.index', compact('products', 'search', 'notFound'));
     }
+
 
     public function create()
     {

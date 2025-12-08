@@ -4,9 +4,34 @@
 
 @section('content')
 <div class="card shadow border-0 rounded-3">
-    <div class="card-header bg-primary text-white py-3 rounded-top">
-        <h4 class="mb-0 text-white">Invoice Saya</h4>
-    </div>
+    <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-3 rounded-top">
+            <h4 class="mb-0 text-white">Invoice Saya</h4>
+
+            <form action="{{ route('client.invoice.index') }}" method="GET" class="d-flex align-items-center"
+                style="gap: 15px;">
+
+                <div class="input-group" style="width: 280px;">
+
+                    <button class="input-group-text border-end-0">
+                        <i class="ti ti-search text-muted"></i>
+                    </button>
+
+                    <input type="text" name="search" class="form-control border-start-0"
+                        placeholder="Cari nomor invoice / kontrak" value="{{ request('search') }}"
+                        style="background-color: white; color: #333;">
+                </div>
+            </form>
+        </div>
+
+        @if(request('search'))
+            <div class="gap-2 px-3 pt-3">
+                <p class="mb-1">Hasil pencarian untuk: "<strong>{{ request('search') }}</strong>"</p>
+
+                @if($invoices->count() === 0)
+                    <p class="text-danger mb-0">Tidak ada data ditemukan.</p>
+                @endif
+            </div>
+        @endif
 
     <div class="table-responsive p-3">
         <table class="table table-hover table-bordered align-middle mb-0">

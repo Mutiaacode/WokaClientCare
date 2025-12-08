@@ -80,43 +80,37 @@ Route::middleware(['auth', 'role:client'])
         Route::post('/contract/{id}/approve', [ClientContractController::class, 'approve'])
             ->name('contract.approve');
 
+
         Route::resource('ticket', ClientTicketController::class);
 
         Route::get('/invoice', [ClientInvoiceController::class, 'index'])
             ->name('invoice.index');
-
         Route::get('/invoice/{id}', [ClientInvoiceController::class, 'show'])
             ->name('invoice.show');
-
         Route::post('/invoice/{id}/upload', [ClientInvoiceController::class, 'uploadPayment'])
             ->name('invoice.upload');
-
         Route::get('/invoice/{id}/pay', [ClientInvoiceController::class, 'pay'])
             ->name('invoice.pay'); // <-- halaman upload
 
+    
         Route::get('/maintenance', [ClientMaintenanceController::class, 'index'])
             ->name('maintenance.index');
-
         Route::post('/maintenance/{id}/accept', [ClientMaintenanceController::class, 'accept'])
-        ->name('maintenance.accept');
-
-
+            ->name('maintenance.accept');
         Route::post('/maintenance/{id}/reject', [ClientMaintenanceController::class, 'reject'])
             ->name('maintenance.reject');
 
         Route::middleware(['auth', 'role:client'])->group(function () {
 
-   Route::get('/profile', [ClientProfileController::class, 'index'])->name('profile.index');
+            Route::get('/profile', [ClientProfileController::class, 'index'])->name('profile.index');
 
-Route::get('/profile/edit', [ClientProfileController::class, 'edit'])->name('profile.edit');
+            Route::get('/profile/edit', [ClientProfileController::class, 'edit'])->name('profile.edit');
 
-Route::post('/profile/update', [ClientProfileController::class, 'update'])->name('profile.update');
+            Route::post('/profile/update', [ClientProfileController::class, 'update'])->name('profile.update');
 
-Route::post('/profile/update-password', [ClientProfileController::class, 'updatePassword'])
-    ->name('profile.password');
-
-});
-    
+            Route::post('/profile/update-password', [ClientProfileController::class, 'updatePassword'])
+                ->name('profile.password');
+        });
     });
 
 Route::middleware(['auth', 'role:teknisi'])
@@ -127,7 +121,12 @@ Route::middleware(['auth', 'role:teknisi'])
         Route::get('/dashboard', [TeknisiDashboardController::class, 'index'])
             ->name('dashboard');
         Route::resource('ticket', TeknisiTicketController::class);
+        Route::get('/teknisi/ticket/search', [TeknisiTicketController::class, 'search'])
+            ->name('ticket.search');
+
         Route::resource('maintenance', TeknisiMaintenanceController::class);
+        Route::get('/teknisi/maintenance/search', [TeknisiMaintenanceController::class, 'search'])
+            ->name('maintenance.search');
     });
 
 
@@ -139,5 +138,18 @@ Route::middleware(['auth', 'role:staff'])
             ->name('dashboard');
 
         Route::resource('tickets', StaffTicketController::class);
+        Route::get('/staff/tickets/search', [StaffTicketController::class, 'search'])
+            ->name('tickets.search');
+
+
         Route::resource('invoices', StaffInvoiceController::class);
     });
+
+
+Route::post('/notif/hide', function () {
+    $hidden = session()->get('hidden_notif', []);
+    $hidden[] = request('id');
+    session()->put('hidden_notif', $hidden);
+
+    return back();
+})->name('notif.hide');
