@@ -5,7 +5,7 @@
 {{-- HEADER --}}
 <div class="mb-5">
     <h2 class="fw-bold text-dark mb-1" style="letter-spacing:.4px">
-        Dashboard
+        Dashboard - Teknisi
     </h2>
     <p class="text-muted mb-0">
         Ringkasan aktivitas sistem hari ini
