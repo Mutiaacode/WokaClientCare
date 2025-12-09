@@ -11,10 +11,19 @@ use Illuminate\Support\Facades\Auth;
 
 class TeknisiTicketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = Ticket::where('teknisi_id', Auth::id())->get();
-        return view('teknisi.ticket.index', compact('tickets'));
+ 
+         $query = Ticket::where('teknisi_id', Auth::id());
+
+    if ($request->status) {
+        $query->where('status', $request->status);
+    }
+
+    $tickets = $query->get();
+
+    return view('teknisi.ticket.index', compact('tickets'));
+
     }
 
     public function show($id)
