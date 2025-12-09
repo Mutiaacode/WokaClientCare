@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Woka Client Care')</title>
+    <title>@yield('title') - Woka Client Care</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/wokalog.svg') }}" />
@@ -220,7 +220,7 @@
                 <div
                     class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between mb-4">
                     <div class="mb-2 mb-sm-0">
-                        <h4 class="mb-1 mt-3">@yield('page-title', 'Dashboard')</h4>
+                        <h4 class="mb-1 mt-3">@yield('title')</h4>
                         <p class="text-muted small mb-0"></p>
                     </div>
                     <nav aria-label="breadcrumb">
@@ -249,7 +249,9 @@
                                 </a>
                             </li>
 
-                            <li class="breadcrumb-item active">@yield('breadcrumb', 'Dashboard')</li>
+                            <li class="breadcrumb-item active">
+                                @yield('title')
+                            </li>
                         </ol>
                     </nav>
 

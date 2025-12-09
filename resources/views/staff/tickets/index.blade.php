@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Ticket')
+
 @section('content')
 
     @if (session('sukses'))
