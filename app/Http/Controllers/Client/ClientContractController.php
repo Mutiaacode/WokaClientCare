@@ -51,4 +51,14 @@ class ClientContractController extends Controller
             ->with('success', 'Kontrak berhasil di ACC.');
     }
 
+    public function download($id)
+{
+    $contract = Contract::findOrFail($id);
+
+    $filePath = storage_path('app/public/' . $contract->file_kontrak);
+
+    return response()->download($filePath);
+}
+
+
 }

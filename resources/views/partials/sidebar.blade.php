@@ -194,17 +194,7 @@
 
 
                 {{-- ================= LOGOUT ================= --}}
-                <hr class="my-3">
-
-                <li class="sidebar-item mt-auto">
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn w-100 text-start d-flex align-items-center px-3 border-0 bg-transparent">
-                            <i class="ti ti-logout me-2"></i>
-                            <span class="hide-menu">Logout</span>
-                        </button>
-                    </form>
-                </li>
+               
 
                 {{-- ================= USER INFO ================= --}}
                 <hr class="my-3">

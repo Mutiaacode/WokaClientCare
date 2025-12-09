@@ -79,6 +79,9 @@ Route::middleware(['auth', 'role:client'])
             ->name('contract.show');
         Route::post('/contract/{id}/approve', [ClientContractController::class, 'approve'])
             ->name('contract.approve');
+        Route::get('/contract/download/{id}', [ClientContractController::class, 'download'])
+    ->name('contract.download');
+    
 
 
         Route::resource('ticket', ClientTicketController::class);
