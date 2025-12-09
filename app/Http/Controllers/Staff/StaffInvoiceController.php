@@ -15,6 +15,7 @@ class StaffInvoiceController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
+        $staffId = auth()->id();
 
         $invoices = Invoice::with(['contract.client.user'])
             ->when($search, function ($query) use ($search) {
@@ -29,38 +30,12 @@ class StaffInvoiceController extends Controller
 
         $notFound = ($search && $invoices->count() == 0);
 
+        $invoices = Invoice::whereHas('contract', function ($q) use ($staffId) {
+            $q->where('staff_id', $staffId);
+        })
+            ->with(['contract.client.user'])
+            ->get();
         return view('staff.invoices.index', compact('invoices', 'search', 'notFound'));
-    }
-    // FORM CREATE
-    public function create()
-    {
-        $clients = User::where('role', 'client')->get();
-        $contracts = Contract::all();
-
-        return view('staff.invoices.create', compact('clients', 'contracts'));
-    }
-
-    // PROSES SIMPAN DATA
-    public function store(Request $request)
-    {
-        $data = $request->validate([
-            'client_id' => 'required',
-            'contract_id' => 'required',
-            'nomor_invoice' => 'required|numeric',
-            'tanggal_terbit' => 'required|date',
-            'catatan' => 'nullable',
-        ]);
-
-        // Nomor invoice otomatis
-        $data['number'] = 'INV-' . now()->format('YmdHis');
-
-        $data['status'] = 'draft';
-        $data['created_by'] = auth()->id();
-
-        Invoice::create($data);
-
-        return redirect()->route('staff.invoices.index')
-            ->with('success', 'Invoice berhasil dibuat!');
     }
 
     // TAMPIL DETAIL
@@ -70,46 +45,13 @@ class StaffInvoiceController extends Controller
         return view('staff.invoices.show', compact('invoice'));
     }
 
-    // FORM EDIT
-    public function edit($id)
-    {
-        $invoice = Invoice::findOrFail($id);
-
-        $clients = User::where('role', 'client')->get();
-        $contracts = Contract::all();
-
-        return view('staff.invoices.edit', compact('invoice', 'clients', 'contracts'));
-    }
-
-    // PROSES UPDATE
-    public function update(Request $request, $id)
-    {
-        $invoice = Invoice::findOrFail($id);
-
-        $data = $request->validate([
-            'client_id' => 'required',
-            'contract_id' => 'required',
-            'amount' => 'required|numeric',
-            'due_date' => 'required|date',
-            'description' => 'nullable',
-        ]);
-
-        $data['updated_by'] = auth()->id();
-
-        $invoice->update($data);
-
-        return redirect()->route('staff.invoices.show', $invoice->id)
-            ->with('success', 'Invoice berhasil diperbarui!');
-    }
-
     public function destroy($id)
     {
         $invoice = Invoice::findOrFail($id);
         $invoice->delete();
 
         return redirect()->route('staff.invoices.index')
-            ->with('success', 'Invoice berhasil dihapus!');
+            ->with('sukses', 'Invoice berhasil dihapus.');
     }
-
 
 }
