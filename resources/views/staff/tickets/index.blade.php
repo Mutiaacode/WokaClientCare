@@ -10,10 +10,19 @@
         <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-3 rounded-top">
             <h4 class="mb-0 text-white">Data Ticket</h4>
 
-            <form action="{{ route('staff.tickets.search') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control me-2 btn btn-light" placeholder="Cari ticket..."
-                    value="{{ request('search') }}">
-                <button class="btn btn-light">Search</button>
+            <form action="{{ route('staff.tickets.index') }}" method="GET" class="d-flex gap-2">
+                <select name="status" class="form-select bg-light">
+                    <option value="">-- Semua Status --</option>
+                    <option value="open" {{ request('status') == 'open' ? 'selected' : '' }}>Open</option>
+                    <option value="in_progress" {{ request('status') == 'in_progress' ? 'selected' : '' }}>In Progress
+                    </option>
+                    <option value="waiting_tech" {{ request('status') == 'waiting_tech' ? 'selected' : '' }}>Waiting Tech
+                    </option>
+                    <option value="resolved" {{ request('status') == 'resolved' ? 'selected' : '' }}>Resolved</option>
+                    <option value="closed" {{ request('status') == 'closed' ? 'selected' : '' }}>Closed</option>
+                </select>
+
+                <button class="btn btn-light">Filter</button>
             </form>
         </div>
 

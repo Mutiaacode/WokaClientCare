@@ -4,8 +4,20 @@
     @if (session('sukses'))
         <div class="alert alert-success mt-3 px-4">{{ session('sukses') }}</div>
     @endif
+    <form action="{{ route('staff.invoices.index') }}" method="GET" class="flex-grow-1 me-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control form-control-lg "
+                        placeholder="Cari invoice berdasarkan nomor invoice atau nama client..." value="{{ request('search') }}">
+                    <button class="btn btn-woka px-4">Cari</button>
+                </div>
+            </form>
 
-    <div class="card shadow border-0 rounded-3">
+            @if (request('search'))
+                <a href="{{ route('staff.invoices.index') }}" class="btn btn-warning btn-lg">
+                    Reset
+                </a>
+            @endif
+    <br><div class="card shadow border-0 rounded-3">
         <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white py-3 rounded-top">
             <h4 class="mb-0 text-white">Data Invoice</h4>
         </div>

@@ -11,13 +11,20 @@ use Illuminate\Support\Facades\Auth;
 class StaffTicketController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = Ticket::where('staff_id', Auth::id())
-            ->orderBy('created_at', 'DESC')
+        $status = $request->status;
+
+        $tickets = Ticket::with(['client.user'])
+            ->when($status, function ($query) use ($status) {
+                $query->where('status', $status);
+            })
+            ->latest()
             ->get();
 
-        return view('staff.tickets.index', compact('tickets'));
+        $notFound = ($status && $tickets->count() == 0);
+
+        return view('staff.tickets.index', compact('tickets', 'status', 'notFound'));
     }
 
 
@@ -45,22 +52,5 @@ class StaffTicketController extends Controller
             ->route('staff.tickets.index')
             ->with('sukses', 'Tiket berhasil diperbarui.');
 
-    }
-
-    public function search(Request $request)
-    {
-        $query = Ticket::where('staff_id', auth()->id());
-
-        if ($request->search != '') {
-            $keyword = $request->search;
-
-            $query->whereHas('client.user', function ($q) use ($keyword) {
-                $q->where('name', 'like', "%$keyword%");
-            });
-        }
-
-        $tickets = $query->get();
-
-        return view('staff.tickets.index', compact('tickets'));
     }
 }

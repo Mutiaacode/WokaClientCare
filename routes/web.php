@@ -138,9 +138,6 @@ Route::middleware(['auth', 'role:staff'])
             ->name('dashboard');
 
         Route::resource('tickets', StaffTicketController::class);
-        Route::get('/staff/tickets/search', [StaffTicketController::class, 'search'])
-            ->name('tickets.search');
-
 
         Route::resource('invoices', StaffInvoiceController::class);
     });
