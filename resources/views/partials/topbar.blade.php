@@ -71,8 +71,6 @@
                                 <div class="flex-grow-1 ms-3">
                                     <div class="small fw-medium">Kontrak hampir expired:
                                         {{ $h->client->nama ?? $h->nama }}</div>
-                                    <div class="text-muted small">Berakhir {{ $h->tanggal_berakhir->diffForHumans() }}
-                                    </div>
                                 </div>
                             </a>
                         </li>
